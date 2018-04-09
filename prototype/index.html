@@ -1,0 +1,82 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+		<style>
+			body {
+			}
+			.sidebar {				
+				float: left;
+				height: 100%;
+				overflow: hidden;
+			}
+			.mode-bar {
+				width: 30px;
+			}
+			.mode-bar ul li {
+				transform: rotate(+90deg);
+				height: 90px;
+				margin-left: -62px;
+			}
+			.scenario-bar {
+				width: 150px;
+				background-color: #e3f2fd;
+			}
+			.scenario-bar .navbar {
+				background-color: #e3f2fd;
+			}
+
+			.section-bar {
+				width: 120px;
+			}
+
+			.active {
+				background-color: darkgrey;
+			}
+		</style>
+		<script
+  			src="https://code.jquery.com/jquery-3.3.1.min.js"
+  			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  			crossorigin="anonymous">
+  				
+		</script>
+		<script type="text/javascript">
+			$(function () {
+				$(".scenario-bar a").click(function() {
+					var bar = $(".section-bar");
+					bar.show();
+					bar.find("li").first().addClass("active");
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="border-right mode-bar sidebar bg-light">
+			<nav class="navbar">
+				<ul class="navbar-nav nav flex-column">
+					<li class="nav-item"><a class="nav-link" href="#">Scenarios</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Countries</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="border-right scenario-bar sidebar">
+			<div style="font-size: 30px; text-align: center;">
+				+
+			</div>
+			<nav class="navbar">
+				<ul class="navbar-nav nav flex-column">
+					<li class="nav-item"><a class="nav-link" href="#">Scenario 1</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Scenario 2</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Scenario 3</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="border-right section-bar sidebar bg-light" style="display: none">
+			<nav class="navbar">
+				<ul class="navbar-nav nav flex-column">
+					<li class="nav-item"><a class="nav-link" href="#">Baseline</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Interventions</a></li>
+				</ul>
+			</nav>
+		</div>
+	</body>
+</html>
