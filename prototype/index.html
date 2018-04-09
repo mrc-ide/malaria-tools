@@ -39,12 +39,28 @@
   			crossorigin="anonymous">
   				
 		</script>
+		<script type="text/javascript" 
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
+		</script>
 		<script type="text/javascript">
 			$(function () {
 				$(".scenario-bar a").click(function() {
 					var bar = $(".section-bar");
 					bar.show();
-					bar.find("li").first().addClass("active");
+					bar.find("a").first().addClass("active");
+					$(".interventions").show();
+				});
+				$(".interventions-nav").click(function() {
+					$(".content-pane").hide();
+					$(".interventions.content-pane").show();
+					$(".section-bar").find(".active").removeClass("active");
+					$(this).addClass("active");
+				});
+				$(".baseline-nav").click(function() {
+					$(".content-pane").hide();
+					$(".baseline.content-pane").show();
+					$(".section-bar").find(".active").removeClass("active");
+					$(this).addClass("active");
 				});
 			});
 		</script>
@@ -60,7 +76,10 @@
 		</div>
 		<div class="border-right scenario-bar sidebar">
 			<div style="font-size: 30px; text-align: center;">
-				+
+				<a href="#" style="display: inline-block" data-toggle="modal" data-target="#new-scenario">
+					+
+				</a>
+				<a href="#" style="display: inline-block">📂</a>
 			</div>
 			<nav class="navbar">
 				<ul class="navbar-nav nav flex-column">
@@ -73,10 +92,86 @@
 		<div class="border-right section-bar sidebar bg-light" style="display: none">
 			<nav class="navbar">
 				<ul class="navbar-nav nav flex-column">
-					<li class="nav-item"><a class="nav-link" href="#">Baseline</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Interventions</a></li>
+					<li class="nav-item"><a class="nav-link interventions-nav" href="#">Interventions</a></li>
+					<li class="nav-item"><a class="nav-link baseline-nav" href="#">Baseline</a></li>
 				</ul>
 			</nav>
+		</div>
+
+		<div class="contents container-fluid">
+			<div class="interventions content-pane" style="display: none;">
+				<div class="row">
+					<div class="col-6">
+						<form>
+							<div class="form-group">
+								<div class="form-check">
+									<input id="a" type="checkbox" class="form-check-input" />
+									<label for="a" class="form-check-label">Treated bednets</label>
+								</div>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" />
+									<label class="form-check-label">Treated bednets</label>
+								</div>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" />
+									<label class="form-check-label">Treated bednets</label>
+								</div>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" />
+									<label class="form-check-label">Treated bednets</label>
+								</div>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" />
+									<label class="form-check-label">Treated bednets</label>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-6">
+
+					</div>
+				</div>
+			</div>
+
+			<div class="baseline content-pane" style="display: none;">
+				Basline
+			</div>
+		</div>
+
+		<div id="new-scenario" class="modal fade" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">New scenario</h5>
+					</div>
+					<div class="modal-body">
+						<h2>Choose a country or region</h2>
+						<div class="country-chooser">
+							<ul>
+								<li>Angola</li>
+								<li>Angola</li>
+								<li>Angola</li>
+								<li>Angola</li>
+								<li>Angola</li>
+								<li>Angola</li>
+								<li>Angola</li>
+								<li>Angola</li>
+							</ul>				
+						</div>
+
+						<div>
+							<h2>Enter a name for the scenario</h2>
+							<input type="text" placeholder="scenario name" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div>
+							<button>Save</button>
+							<button>Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
