@@ -6,7 +6,7 @@ body {
     overflow: hidden;
 }
 .mode-bar {
-    width: 37px;
+    width: 38px;
 }
 .mode-bar ul {
     top: 109px;
@@ -44,7 +44,9 @@ body {
 
 .scenario-bar.in,.section-bar.in {
     width: 150px;
+    border-left:1px solid #dee2e6;
     border-right:1px solid #dee2e6;
+
 }
 
 a.active {

@@ -104,19 +104,25 @@
                                        data-target="#nets-slider" class="ml-2"/>
                             </div>
                         </form>
-                        <div class="slider" data-control="#nets-coverage" id="nets-slider"></div>
+                        <div class="slider"
+                             data-initial="26"
+                             data-control="#nets-coverage"
+                             id="nets-slider"></div>
                     </div>
                     <div class="tab-pane settings" id="settings-spray" role="tabpanel">
                         <form class="pt-5 pr-5 form-inline">
                             <div class="form-group">
                                 <label for="spray-coverage">Target coverage:</label>
-                                <input type="number" value="26" id="spray-coverage"
+                                <input type="number" value="50" id="spray-coverage"
                                        data-role="slider-value"
                                        data-target="#spray-slider"
                                        class="ml-2"/>
                             </div>
                         </form>
-                        <div class="slider" data-control="#spray-coverage" id="spray-slider"></div>
+                        <div class="slider"
+                             data-control="#spray-coverage"
+                             data-initial="50"
+                             id="spray-slider"></div>
                     </div>
                 </div>
             </div>

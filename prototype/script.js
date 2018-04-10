@@ -22,7 +22,9 @@ $(function () {
     });
 
     $(".slider").slider({
-        value: 26,
+        create: function(event, ui) {
+            $(this).slider('value', $(this).data('initial'));
+        },
         change: function (event, ui) {
             var selector = $(this).data("control");
             $(selector)
