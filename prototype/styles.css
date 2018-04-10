@@ -47,7 +47,36 @@ body {
     border-right:1px solid #dee2e6;
 }
 
-.active {
+a.active {
     background: #007bff;
     color: white !important;
+}
+
+.content-pane {
+    display: none;
+}
+
+.content-pane.in {
+    display: block;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:30px;
+    height:30px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+    vertical-align: top;
+}
+input[type='checkbox']:checked {
+    background: #007bff;
+}
+
+label.checkbox-label {
+    margin-top: 3px;
+}
+
+input[type='number']{
+    width:50px;
 }
