@@ -40,15 +40,14 @@
     <ul class="nav flex-column border-top" role="tablist">
         <li class="nav-item">
             <a id="interventions-tab" aria-controls="interventions" class="nav-link interventions-nav" href="#"
-               data-target="#interventions"
                data-toggle="tab" role="tab">Interventions</a></li>
         <li class="nav-item">
             <a id="baseline-tab" aria-controls="baseline" class="nav-link baseline-nav" href="#" role="tab"
-               data-target="#baseline" data-toggle="tab">Baseline</a></li>
+               data-toggle="tab">Baseline</a></li>
     </ul>
 </div>
 
-<div class="contents container-fluid tab-content">
+<div class="contents container-fluid">
     <div class="tab-content">
         <div class="tab-pane" id="interventions" role="tabpanel" aria-labelledby="interventions-tab">
             <div class="row">
@@ -61,46 +60,72 @@
             <div class="row">
                 <div class="col-6">
                     <form class="pl-5" style="margin-right: -1em;">
-                        <div class="form-group p-2">
+                        <div class="form-group p-2"
+                             data-toggle="custom-tab"
+                             data-target="#settings-nets">
                             <input type="checkbox" id="nets"/>
-                            <label class="checkbox-label" for="nets">Insecticide Treated Nets</label>
+                            <label class="checkbox-label">Insecticide Treated Nets</label>
                         </div>
-                        <div class="form-group p-2">
+                        <div class="form-group p-2"
+                             data-toggle="custom-tab"
+                             data-target="#settings-spray">
                             <input type="checkbox" id="spray"/>
-                            <label class="checkbox-label" for="spray">Indoor Residual Spraying</label>
+                            <label class="checkbox-label">Indoor Residual Spraying</label>
                         </div>
                         <div class="form-group p-2">
                             <input type="checkbox" id="ipt"/>
-                            <label class="checkbox-label" for="ipt">IPT/SMC</label>
+                            <label class="checkbox-label">IPT/SMC</label>
                         </div>
                         <div class="form-group p-2">
                             <input type="checkbox" id="mass"/>
-                            <label class="checkbox-label" for="mass">Mass Treatment</label>
+                            <label class="checkbox-label">Mass Treatment</label>
                         </div>
                         <div class="form-group p-2">
                             <input type="checkbox" id="epi"/>
-                            <label class="checkbox-label" for="epi">EPI Vaccination</label>
+                            <label class="checkbox-label">EPI Vaccination</label>
                         </div>
                         <div class="form-group p-2">
                             <input type="checkbox" id="mass-vac"/>
-                            <label class="checkbox-label" for="mass-vac">Mass Vaccination</label>
+                            <label class="checkbox-label">Mass Vaccination</label>
                         </div>
                         <div class="form-group p-2">
                             <input type="checkbox" id="first"/>
-                            <label class="checkbox-label" for="first">First line Treatment</label>
+                            <label class="checkbox-label">First line Treatment</label>
                         </div>
                     </form>
                 </div>
-                <div class="col-6 settings">
-
-                    <form class="pt-5 form-inline" >
-                        <div class="form-group">
-                            <label for="coverage">Target coverage:</label>
-                            <input type="number" value="26" id="coverage" class="ml-2"/>
-                        </div>
-                    </form>
-                    <div id="slider"></div>
-
+                <div class="col-6 pr-5 tab-content custom-tabs">
+                    <div class="tab-pane settings" id="settings-nets" role="tabpanel">
+                        <form class="pt-5 pr-5 form-inline">
+                            <div class="form-group">
+                                <label for="nets-coverage">Target coverage:</label>
+                                <input type="number" value="26" id="nets-coverage"
+                                       data-role="slider-value"
+                                       data-target="#nets-slider" class="ml-2"/>
+                            </div>
+                        </form>
+                        <div class="slider" data-control="#nets-coverage" id="nets-slider"></div>
+                    </div>
+                    <div class="tab-pane settings" id="settings-spray" role="tabpanel">
+                        <form class="pt-5 pr-5 form-inline">
+                            <div class="form-group">
+                                <label for="spray-coverage">Target coverage:</label>
+                                <input type="number" value="26" id="spray-coverage"
+                                       data-role="slider-value"
+                                       data-target="#spray-slider"
+                                       class="ml-2"/>
+                            </div>
+                        </form>
+                        <div class="slider" data-control="#spray-coverage" id="spray-slider"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row fixed-bottom">
+                <div class="col-12">
+                    <div class="float-right p-5">
+                        <button class="rounded-0 btn-lg btn-primary">Save</button>
+                        <button class="rounded-0 btn-lg btn-light">Discard</button>
+                    </div>
                 </div>
             </div>
         </div>

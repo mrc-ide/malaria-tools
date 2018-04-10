@@ -13,22 +13,29 @@ $(function () {
         $(this).addClass("active");
     });
 
-    $("#slider").slider({
+    $("[data-toggle='custom-tab']").click(function () {
+        var selector = $(this).data("target");
+        $('.custom-tabs .tab-pane').removeClass("active show");
+        $(selector).addClass('active show');
+        $('.form-group').removeClass("active");
+        $(this).toggleClass("active");
+    });
+
+    $(".slider").slider({
         value: 26,
         change: function (event, ui) {
-            $("#coverage")
+            var selector = $(this).data("control");
+            $(selector)
                 .val(ui.value);
         }
     });
 
-    $("#coverage").change(function (e) {
-        if (e.target.value !== $('#slider').slider("value"))
-            $('#slider').slider("value", e.target.value)
+    $("[data-role=slider-value]").change(function (e) {
+        var selector = $(this).data("target");
+        var slider = $(selector);
+        if (e.target.value !== slider.slider("value"))
+            slider.slider("value", e.target.value)
     });
 
-    $(".checkbox-label, input[type='checkbox']").click(function(){
-        $('.form-group').removeClass("active");
-        $(this).closest(".form-group").toggleClass("active");
-    })
 });
 

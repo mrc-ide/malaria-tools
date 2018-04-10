@@ -52,14 +52,6 @@ a.active {
     color: white !important;
 }
 
-.content-pane {
-    display: none;
-}
-
-.content-pane.in {
-    display: block;
-}
-
 input[type='checkbox'] {
     -webkit-appearance:none;
     width:30px;
@@ -72,11 +64,15 @@ input[type='checkbox'] {
 
 input[type='checkbox']:checked {
     background: #007bff;
-    border:2px solid white;
 }
 
 .form-group.active, .settings {
     background: #e9ecef;
+}
+
+.settings {
+    margin-left: -1em;
+    padding: 1em;
 }
 
 label.checkbox-label {
