@@ -26,7 +26,7 @@ want to manage a Windows server, so probably Docker on Linux?
   at least architectures. :(
 
 ## ReactNative
-???
+As of January 2018 there isn't any official support for desktop applications in React Nativei.
 
 ## Docker
 Build the following docker images:
