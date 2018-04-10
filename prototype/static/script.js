@@ -22,7 +22,7 @@ $(function () {
     });
 
     $(".slider").slider({
-        create: function(event, ui) {
+        create: function (event, ui) {
             $(this).slider('value', $(this).data('initial'));
         },
         change: function (event, ui) {
@@ -37,6 +37,40 @@ $(function () {
         var slider = $(selector);
         if (e.target.value !== slider.slider("value"))
             slider.slider("value", e.target.value)
+    });
+
+    const myLineChart = new Chart($('#seasonal'), {
+        type: 'line',
+        data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [{
+                label: 'rainfall',
+                borderColor: "#3e95cd",
+                data: [12, 19, 15, 13, 10, 3, 2, 2, 4, 7, 11, 14]
+            },
+                {
+                    label: 'incidence',
+                    borderColor: "#8e5ea2",
+                    data: [11, 12, 18, 15, 13, 9, 4, 3, 3, 5, 8, 12]
+                }]
+        },
+        options: {}
+    });
+
+    const myPieChart = new Chart($('#vectors'), {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [20, 0, 80],
+                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+            }],
+
+            labels: [
+                'Funestus',
+                'Arabiensis',
+                'Gambiae'
+            ]
+        }
     });
 
 });
