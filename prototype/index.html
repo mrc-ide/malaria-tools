@@ -52,41 +52,48 @@
     <div class="tab-content">
         <div class="tab-pane" id="interventions" role="tabpanel" aria-labelledby="interventions-tab">
             <div class="row">
-                <div class="col-6 border-right">
-                    <form class="p-5">
-                        <div class="form-group">
+                <div class="col-12">
+                    <h5 class="p-5">
+                        Choose which interventions you want to include in this scenario
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <form class="pl-5" style="margin-right: -1em;">
+                        <div class="form-group p-2">
                             <input type="checkbox" id="nets"/>
                             <label class="checkbox-label" for="nets">Insecticide Treated Nets</label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group p-2">
                             <input type="checkbox" id="spray"/>
                             <label class="checkbox-label" for="spray">Indoor Residual Spraying</label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group p-2">
                             <input type="checkbox" id="ipt"/>
                             <label class="checkbox-label" for="ipt">IPT/SMC</label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group p-2">
                             <input type="checkbox" id="mass"/>
                             <label class="checkbox-label" for="mass">Mass Treatment</label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group p-2">
                             <input type="checkbox" id="epi"/>
                             <label class="checkbox-label" for="epi">EPI Vaccination</label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group p-2">
                             <input type="checkbox" id="mass-vac"/>
                             <label class="checkbox-label" for="mass-vac">Mass Vaccination</label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group p-2">
                             <input type="checkbox" id="first"/>
                             <label class="checkbox-label" for="first">First line Treatment</label>
                         </div>
                     </form>
                 </div>
-                <div class="col-6">
+                <div class="col-6 settings">
 
-                    <form class="pt-5 form-inline">
+                    <form class="pt-5 form-inline" >
                         <div class="form-group">
                             <label for="coverage">Target coverage:</label>
                             <input type="number" value="26" id="coverage" class="ml-2"/>

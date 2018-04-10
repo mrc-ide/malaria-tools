@@ -25,5 +25,10 @@ $(function () {
         if (e.target.value !== $('#slider').slider("value"))
             $('#slider').slider("value", e.target.value)
     });
+
+    $(".checkbox-label, input[type='checkbox']").click(function(){
+        $('.form-group').removeClass("active");
+        $(this).closest(".form-group").toggleClass("active");
+    })
 });
 
