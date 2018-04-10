@@ -1,0 +1,53 @@
+body {
+}
+.sidebar {
+    float: left;
+    height: 100%;
+    overflow: hidden;
+}
+.mode-bar {
+    width: 37px;
+}
+.mode-bar ul {
+    top: 109px;
+    left: -72px;
+    transform: rotate(+90deg);
+    transform-origin: top;
+    position: fixed;
+}
+
+.mode-bar ul li {
+    border-right: 1px solid #dee2e6;
+}
+
+.add-open {
+    font-size: 30px; text-align: center;
+    height: 50px;
+}
+
+.scenario-bar, .section-bar {
+    -webkit-transition: width 500s ease;
+    -moz-transition: width 500s ease;
+    -o-transition: width 500ms ease;
+    transition: width 500ms ease;
+    width: 0;
+    border:0;
+}
+
+.section-bar {
+    padding-top: 49px;
+}
+
+.scenario-bar {
+    background-color: #e3f2fd;
+}
+
+.scenario-bar.in,.section-bar.in {
+    width: 150px;
+    border-right:1px solid #dee2e6;
+}
+
+.active {
+    background: #007bff;
+    color: white !important;
+}
