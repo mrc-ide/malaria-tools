@@ -1,13 +1,17 @@
-body {
+html, body {
+    height: 100%;
 }
+
 .sidebar {
     float: left;
     height: 100%;
     overflow: hidden;
 }
+
 .mode-bar {
     width: 38px;
 }
+
 .mode-bar ul {
     top: 109px;
     left: -72px;
@@ -21,7 +25,8 @@ body {
 }
 
 .add-open {
-    font-size: 30px; text-align: center;
+    font-size: 30px;
+    text-align: center;
     height: 50px;
 }
 
@@ -31,7 +36,7 @@ body {
     -o-transition: width 500ms ease;
     transition: width 500ms ease;
     width: 0;
-    border:0;
+    border: 0;
 }
 
 .section-bar {
@@ -42,10 +47,10 @@ body {
     background-color: #e3f2fd;
 }
 
-.scenario-bar.in,.section-bar.in {
+.scenario-bar.in, .section-bar.in {
     width: 150px;
-    border-left:1px solid #dee2e6;
-    border-right:1px solid #dee2e6;
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
 
 }
 
@@ -55,12 +60,12 @@ a.active {
 }
 
 input[type='checkbox'] {
-    -webkit-appearance:none;
-    width:30px;
-    height:30px;
-    background:white;
-    border-radius:5px;
-    border:2px solid #555;
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 5px;
+    border: 2px solid #555;
     vertical-align: top;
 }
 
@@ -81,6 +86,14 @@ label.checkbox-label {
     margin-top: 3px;
 }
 
-input[type='number']{
-    width:50px;
+input[type='number'] {
+    width: 50px;
+}
+
+.custom-tabs .tab-pane {
+    display: none;
+}
+
+.custom-tabs .tab-pane.active.show {
+    display: block;
 }

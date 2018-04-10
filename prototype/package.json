@@ -1,0 +1,23 @@
+{
+  "name": "malaria-tools",
+  "version": "1.0.0",
+  "description": "protoype for the new Malaria Tools app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrc-ide/malaria-tools.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrc-ide/malaria-tools/issues"
+  },
+  "homepage": "https://github.com/mrc-ide/malaria-tools#readme",
+  "dependencies": {
+    "ejs": "^2.5.8",
+    "express": "^4.16.3"
+  }
+}

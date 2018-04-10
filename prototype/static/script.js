@@ -1,8 +1,8 @@
 $(function () {
-    $(".scenario-bar a").click(function () {
-        $(".content-pane").removeClass("in");
+    $("#scenarios a").click(function () {
+
         $(".section-bar").find(".active").removeClass("active");
-        $(".section-bar ul").find("a").first().addClass("active");
+        $(".section-bar").find("a").first().addClass("active");
         $("#interventions").addClass('active show');
     });
 

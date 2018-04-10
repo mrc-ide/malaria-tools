@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col-12">
+        <h5 class="p-5">
+            Choose which interventions you want to include in this scenario
+        </h5>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <form class="pl-5" style="margin-right: -1em;">
+            <div class="form-group p-2"
+                 data-toggle="custom-tab"
+                 data-target="#settings-nets">
+                <input type="checkbox" id="nets"/>
+                <label class="checkbox-label">Insecticide Treated Nets</label>
+            </div>
+            <div class="form-group p-2"
+                 data-toggle="custom-tab"
+                 data-target="#settings-spray">
+                <input type="checkbox" id="spray"/>
+                <label class="checkbox-label">Indoor Residual Spraying</label>
+            </div>
+            <div class="form-group p-2">
+                <input type="checkbox" id="ipt"/>
+                <label class="checkbox-label">IPT/SMC</label>
+            </div>
+            <div class="form-group p-2">
+                <input type="checkbox" id="mass"/>
+                <label class="checkbox-label">Mass Treatment</label>
+            </div>
+            <div class="form-group p-2">
+                <input type="checkbox" id="epi"/>
+                <label class="checkbox-label">EPI Vaccination</label>
+            </div>
+            <div class="form-group p-2">
+                <input type="checkbox" id="mass-vac"/>
+                <label class="checkbox-label">Mass Vaccination</label>
+            </div>
+            <div class="form-group p-2">
+                <input type="checkbox" id="first"/>
+                <label class="checkbox-label">First line Treatment</label>
+            </div>
+        </form>
+    </div>
+    <div class="col-6 pr-5 custom-tabs">
+        <div class="tab-pane p-5 settings" id="settings-nets">
+            <form>
+                <div class="form-group row">
+                    <label class="col-5 col-form-label" for="nets-coverage">Target coverage</label>
+                    <div class="col-7">
+                        <input type="number" value="26" id="nets-coverage"
+                               data-role="slider-value"
+                               data-target="#nets-slider" />
+                    </div>
+                </div>
+            </form>
+            <div class="slider"
+                 data-initial="26"
+                 data-control="#nets-coverage"
+                 id="nets-slider"></div>
+        </div>
+        <div class="tab-pane p-5 settings" id="settings-spray">
+            <form>
+                <div class="form-group row">
+                    <label class="col-5 col-form-label">Target coverage</label>
+                    <div class="col-7">
+                        <input type="number" value="50"
+                               id="spray-coverage"
+                               data-role="slider-value"
+                               data-target="#spray-slider"/>
+                    </div>
+                </div>
+
+            </form>
+            <div class="slider"
+                 data-control="#spray-coverage"
+                 data-initial="50"
+                 id="spray-slider"></div>
+            <form class="mt-5">
+                <div class="form-group row">
+                    <label class="col-5 col-form-label">Interval</label>
+                    <div class="col-7">
+                        <input type="number" value="1"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-5 col-form-label">Start year</label>
+                    <div class="col-7">
+                        <input type="number" value="0">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row fixed-bottom">
+    <div class="col-12">
+        <div class="float-right p-5">
+            <button class="rounded-0 btn-lg btn-primary">Save</button>
+            <button class="rounded-0 btn-lg btn-light">Discard</button>
+        </div>
+    </div>
+</div>

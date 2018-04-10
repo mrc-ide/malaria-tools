@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<%- include('head') %>
+<body>
+<div class="border-right mode-bar sidebar bg-light">
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            <a class="nav-link" href="#"
+               data-toggle="toggle"
+               data-target="#scenario-bar">Scenarios</a>
+        </li>
+        <li class="list-inline-item">
+            <a class="nav-link" href="#">Countries</a>
+        </li>
+    </ul>
+</div>
+<div class="scenario-bar sidebar" id="scenario-bar">
+    <div class="add-open border-bottom">
+        <a href="#" class="d-inline" data-toggle="modal" data-target="#new-scenario">
+            +
+        </a>
+        <a href="#" class="d-inline">
+            <%- include('open-icon') %>
+        </a>
+    </div>
+    <ul class="nav flex-column" id="scenarios">
+        <li class="nav-item"><a class="nav-link" href="#" data-toggle="toggle" data-target="#sections">Scenario
+                1</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-toggle="toggle" data-target="#sections">Scenario
+                2</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-toggle="toggle" data-target="#sections">Scenario
+                3</a></li>
+    </ul>
+    <ul class="nav flex-column border-top">
+        <li class="nav-item"><a class="nav-link" href="#">Results
+            </a></li>
+    </ul>
+</div>
+<div class="section-bar sidebar bg-light" id="sections">
+    <ul class="nav flex-column border-top">
+        <li class="nav-item">
+            <a id="interventions-tab" class="nav-link" href="#interventions"
+               data-toggle="tab">Interventions</a></li>
+        <li class="nav-item">
+            <a id="baseline-tab" class="nav-link" href="#baseline"
+               data-toggle="tab">Baseline</a></li>
+    </ul>
+</div>
+
+<div class="contents container-fluid">
+    <div class="tab-content">
+        <div class="tab-pane" id="interventions">
+            <%- include('edit-scenario') %>
+        </div>
+        <div class="tab-pane" id="baseline">
+            <%- include('baseline') %>
+        </div>
+    </div>
+</div>
+
+<%- include('new-scenario') %>
+
+<%- include('scripts') %>
+
+</body>
+</html>
