@@ -54,7 +54,13 @@ $(function () {
                     data: [11, 12, 18, 15, 13, 9, 4, 3, 3, 5, 8, 12]
                 }]
         },
-        options: {}
+        options: {
+            title: {
+                text: "Seasonal characteristics",
+                display: true,
+                position: "left"
+            }
+        }
     });
 
     const myPieChart = new Chart($('#vectors'), {
@@ -70,6 +76,13 @@ $(function () {
                 'Arabiensis',
                 'Gambiae'
             ]
+        },
+        options: {
+            title: {
+                text: "Vectors",
+                display: true,
+                position: "left"
+            }
         }
     });
 
