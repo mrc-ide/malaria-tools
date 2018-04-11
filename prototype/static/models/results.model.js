@@ -1,9 +1,9 @@
 function Results() {
-	var self = this;
+    var self = this;
 
-	var renderChart = function(target, yLabel, xLabel) {
-		return new Chart($(target), {
-			type: 'line',
+    var renderChart = function(target, yLabel, xLabel) {
+        return new Chart($(target), {
+            type: 'line',
             data: {
                 labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                 datasets: [
@@ -22,44 +22,44 @@ function Results() {
             options: {
                 scales: {
                     yAxes: [{
-                    	ticks: {
-                    		beginAtZero: true
-                    	},
-                    	scaleLabel: {
-                    		display: true,
-                    		labelString: yLabel
-                    	}
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: yLabel
+                        }
                     }],
                     xAxes: [{
-                    	scaleLabel: {
-                    		display: true,
-                    		labelString: xLabel
-                    	}
+                        scaleLabel: {
+                            display: true,
+                            labelString: xLabel
+                        }
                     }]
-            	}
+                }
             }
-		});
-	}
+        });
+    }
 
 
-	self.render = function() {
-		$.each($('.prevalence'), function() { 
-			renderChart(this, "Prevalence", "? Unknown ?"); 
-		});
-		$.each($('.prevalence0-5'), function() { 
-			renderChart(this, "Prevalence 0-5", "? Unknown ?"); 
-		});
-		$.each($('.clinical-incidence'), function() { 
-			renderChart(this, "Clinical incidence", "? Unknown ?"); 
-		});
-		$.each($('.severe-incidence'), function() { 
-			renderChart(this, "Severe disease incidence", "? Unknown ?"); 
-		});
-		$.each($('.mortality'), function() { 
-			renderChart(this, "Mortality", "? Unknown ?");
-		});
-		$.each($('.eir'), function() { 
-			renderChart(this, "Entomological innoculation rate", "? Unknown ?"); 
-		});
-	};
+    self.render = function() {
+        $.each($('.prevalence'), function() { 
+            renderChart(this, "Prevalence", "? Unknown ?"); 
+        });
+        $.each($('.prevalence0-5'), function() { 
+            renderChart(this, "Prevalence 0-5", "? Unknown ?"); 
+        });
+        $.each($('.clinical-incidence'), function() { 
+            renderChart(this, "Clinical incidence", "? Unknown ?"); 
+        });
+        $.each($('.severe-incidence'), function() { 
+            renderChart(this, "Severe disease incidence", "? Unknown ?"); 
+        });
+        $.each($('.mortality'), function() { 
+            renderChart(this, "Mortality", "? Unknown ?");
+        });
+        $.each($('.eir'), function() { 
+            renderChart(this, "Entomological innoculation rate", "? Unknown ?"); 
+        });
+    };
 }
