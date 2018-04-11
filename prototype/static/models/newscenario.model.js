@@ -40,7 +40,6 @@ function NewScenario(countries, parent) {
 
 	self.createScenario = function() {
 		if (self.isValid()) {
-
 			self.parent.scenarios.push(self);
 			self.parent.currentScenario(self);
 		} else {
