@@ -20,9 +20,15 @@
 </div>
 <div class="scenario-bar sidebar in" id="scenario-bar">
     <div class="add-open border-bottom">
-        <a href="#" class="d-inline" data-toggle="modal" data-target="#new-scenario">
-            +
-        </a>
+        <span data-bind="with: newScenario">
+            <a href="#" 
+               class="d-inline" 
+               data-bind="click: clear"
+               data-toggle="modal" 
+               data-target="#new-scenario">
+                +
+            </a>
+        </span>
         <a href="#" class="d-inline">
             <%- include('open-icon') %>
         </a>
