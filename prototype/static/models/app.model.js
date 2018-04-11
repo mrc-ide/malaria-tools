@@ -101,7 +101,7 @@ function AppModel() {
     }, self);
     self.showResultsSection = ko.computed(function() {
         return self.mode() == "scenario"
-               self.currentScenario() == "results";
+            && self.currentScenario() == "results";
     });
 
     self.showResults = function() {
