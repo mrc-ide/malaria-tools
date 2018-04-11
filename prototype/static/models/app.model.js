@@ -7,13 +7,15 @@ function AppModel() {
 	var countryObjects = countries.map(function(x) {
 		return new Country(x, ["Region 1", "Region 2", "Region 3", "Region 4"]);
 	})
-	this.countries = ko.observableArray(countryObjects);
-	this.currentCountry = ko.observable(this.countries()[0]);
-	this.selectedCountry = ko.observable(this.countries()[0]);
-	this.newCountry = ko.computed(function(){
+	self.countries = ko.observableArray(countryObjects);
+	self.scenarios = ko.observableArray([]);
+
+	self.currentCountry = ko.observable(self.countries()[0]);
+	self.selectedCountry = ko.observable(self.countries()[0]);
+	self.newCountry = ko.computed(function(){
 		return new Country(self.selectedCountry().name + "-1",  ["Region 1", "Region 2", "Region 3", "Region 4"])
 	});
-	this.newScenario = ko.observable(new NewScenario(countryObjects));
+	self.newScenario = ko.observable(new NewScenario(countryObjects, self));
 }
 
 function Country(name, regions) {

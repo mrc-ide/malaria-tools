@@ -2,7 +2,6 @@ $(function () {
     ko.applyBindings(new AppModel());
 
     $("#scenarios a").click(function () {
-
         $(".section-bar").find(".active").removeClass("active");
         $(".section-bar").find("a").first().addClass("active");
         $("#interventions").addClass('active show');

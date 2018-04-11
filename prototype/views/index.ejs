@@ -27,13 +27,13 @@
             <%- include('open-icon') %>
         </a>
     </div>
-    <ul class="nav flex-column" id="scenarios">
-        <li class="nav-item"><a class="nav-link" href="#" data-toggle="toggle" data-target="#sections">Scenario
-                1</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" data-toggle="toggle" data-target="#sections">Scenario
-                2</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" data-toggle="toggle" data-target="#sections">Scenario
-                3</a></li>
+    <ul class="nav flex-column" id="scenarios" data-bind="foreach: scenarios">
+        <li class="nav-item">
+            <a class="nav-link" href="#" 
+               data-toggle="toggle" data-target="#sections"
+               data-bind="text: name">
+            </a>
+        </li>
     </ul>
     <ul class="nav flex-column border-top">
         <li class="nav-item"><a class="nav-link" href="#">Results
