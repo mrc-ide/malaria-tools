@@ -9,7 +9,10 @@ $(function () {
     });
 
     $("[data-toggle='toggle']").click(function () {
+
         var selector = $(this).data("target");
+        var selectorToClose = $(this).data("close");
+        $(selectorToClose).removeClass('in');
         $(selector).addClass('in');
         $(this).closest("ul").find("a").removeClass("active");
         $(this).addClass("active");

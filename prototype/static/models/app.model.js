@@ -3,11 +3,17 @@ var countries = [
 ];
 
 function AppModel() {
+	var self = this;
 	var countryObjects = countries.map(function(x) {
 		return new Country(x, ["Region 1", "Region 2", "Region 3", "Region 4"]);
 	})
 	this.countries = ko.observableArray(countryObjects);
 	this.newScenario = ko.observable(new NewScenario(countryObjects));
+	this.currentCountry = ko.observable(this.countries()[0]);
+	this.selectedCountry = ko.observable(this.countries()[0]);
+	this.newCountry = ko.computed(function(){
+		return new Country(self.selectedCountry().name + "-1",  ["Region 1", "Region 2", "Region 3", "Region 4"])
+	})
 }
 
 function Country(name, regions) {

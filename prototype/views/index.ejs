@@ -7,10 +7,14 @@
         <li class="list-inline-item">
             <a class="nav-link" href="#"
                data-toggle="toggle"
-               data-target="#scenario-bar">Scenarios</a>
+               data-target="#scenario-bar"
+               data-close="#country-bar, #regions">Scenarios</a>
         </li>
-        <li class="list-inline-item">
-            <a class="nav-link" href="#">Countries</a>
+        <li class="list-inline-item" style="margin-left: -13px;">
+            <a class="nav-link" href="#"
+               data-toggle="toggle"
+               data-target="#country-bar"
+               data-close="#scenario-bar, #sections">Countries</a>
         </li>
     </ul>
 </div>
@@ -36,6 +40,26 @@
             </a></li>
     </ul>
 </div>
+<div class="country-bar sidebar" id="country-bar">
+    <div class="add-open border-bottom">
+        <a href="#" class="d-inline"
+           data-toggle="modal"
+           data-target="#new-country">
+            +
+        </a>
+        <a href="#" class="d-inline">
+            <%- include('open-icon') %>
+        </a>
+    </div>
+    <ul class="nav flex-column" id="countries" data-bind="foreach: countries">
+        <li class="nav-item"><a class="nav-link" href="#"
+                                data-toggle="toggle"
+                                data-target="#regions"
+                                data-bind="text: name, click: function() {
+                                 $parent.currentCountry($data);
+                                 console.log($parent.currentCountry())}"></a></li>
+    </ul>
+</div>
 <div class="section-bar sidebar bg-light" id="sections">
     <ul class="nav flex-column border-top">
         <li class="nav-item">
@@ -46,6 +70,16 @@
                data-toggle="tab">Baseline</a></li>
     </ul>
 </div>
+<div class="region-bar sidebar bg-light" id="regions">
+    <div data-bind="with: currentCountry">
+        <ul class="nav flex-column border-top" data-bind="foreach: regions">
+            <li class="nav-item"><a class="nav-link"
+                                    data-bind="text: $data"
+                                    data-toggle="tab"
+                                    href="#baseline"></a></li>
+        </ul>
+    </div>
+</div>
 
 <div class="contents container-fluid">
     <div class="tab-content">
@@ -55,10 +89,14 @@
         <div class="tab-pane" id="baseline">
             <%- include('baseline') %>
         </div>
+        <div class="tab-pane" id="edit-region">
+            <%- include('edit-region') %>
+        </div>
     </div>
 </div>
 
 <%- include('new-scenario') %>
+<%- include('new-country') %>
 
 <%- include('scripts') %>
 
