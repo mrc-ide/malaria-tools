@@ -3,5 +3,18 @@ var countries = [
 ];
 
 function AppModel() {
-	this.countries = ko.observableArray(countries);
+	this.countries = ko.observableArray(countries.map(function(x) {
+		return new Country(x, ["Region 1", "Region 2", "Region 3", "Region 4"]);
+	}));
+	this.newScenario = new NewScenario();
+}
+
+function Country(name, regions) {
+	this.name = name;
+	this.regions = ko.observableArray(regions);
+}
+
+function NewScenario() {
+	this.selectedCountry = ko.observable();
+	this.selectedRegion = ko.observable();
 }
