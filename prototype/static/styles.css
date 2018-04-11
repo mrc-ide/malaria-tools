@@ -4,8 +4,8 @@ html, body {
 
 .sidebar {
     float: left;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    overflow-x: hidden;
 }
 
 .mode-bar {
@@ -30,7 +30,7 @@ html, body {
     height: 50px;
 }
 
-.scenario-bar, .section-bar {
+.scenario-bar, .section-bar, .country-bar, .region-bar {
     -webkit-transition: width 500s ease;
     -moz-transition: width 500s ease;
     -o-transition: width 500ms ease;
@@ -39,15 +39,19 @@ html, body {
     border: 0;
 }
 
-.section-bar {
+.section-bar, .region-bar {
     padding-top: 49px;
+}
+
+.country-bar {
+    background-color: #edf6ef;
 }
 
 .scenario-bar {
     background-color: #e3f2fd;
 }
 
-.scenario-bar.in, .section-bar.in {
+.sidebar.in {
     width: 150px;
     border-left: 1px solid #dee2e6;
     border-right: 1px solid #dee2e6;

@@ -7,6 +7,7 @@ function AppModel() {
 		return new Country(x, ["Region 1", "Region 2", "Region 3", "Region 4"]);
 	}));
 	this.newScenario = new NewScenario();
+	this.currentCountry = ko.observable(new Country("", []));
 }
 
 function Country(name, regions) {
