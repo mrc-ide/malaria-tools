@@ -36,8 +36,15 @@
     <ul class="nav flex-column" id="scenarios" data-bind="foreach: scenarios">
         <li class="nav-item">
             <a class="nav-link" href="#" 
-               data-toggle="toggle" data-target="#sections"
-               data-bind="text: name">
+               data-toggle="toggle" data-target="#sections">
+               <div data-bind="text: name"></div>
+               <small>
+                   <span data-bind="with: country">
+                        <span data-bind="text: name"></span>
+                    </span>
+                    <span data-bind="if: region"> – </span>
+                    <span data-bind="text: region"></span>
+               </small>
             </a>
         </li>
     </ul>
