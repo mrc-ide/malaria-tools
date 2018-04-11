@@ -101,20 +101,7 @@
     <div class="tab-content">
         <div class="tab-pane" id="no-scenario"
              data-bind="css: { active: showResultsSection }">
-            <div class="row p-5">
-                <div class="col-12">
-                    <h4>You haven't created any scenarios yet.</h4>
-                    <h4 data-bind="with: newScenario">
-                        <a href="#"
-                           class="d-inline"
-                           data-bind="click: clear"
-                           data-toggle="modal"
-                           data-target="#new-scenario">
-                            Create scenario
-                        </a>
-                    </h4>
-                </div>
-            </div>
+             <%- include('results') %>
         </div>
         <div class="tab-pane" id="interventions"
              data-bind="css: {active: scenarioMode() == 'intervention' && showScenarioSection() }">

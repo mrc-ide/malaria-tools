@@ -10,6 +10,7 @@ function AppModel() {
 
 	self.mode = ko.observable('scenario');
 	self.scenarioMode = ko.observable('intervention');
+    self.results = new Results();
 
 	self.countries = ko.observableArray(countryObjects);
 	self.scenarios = ko.observableArray([]);
@@ -53,10 +54,13 @@ function AppModel() {
                             }]
                     },
                     options: {
-                        title: {
-                            text: "Seasonal characteristics",
-                            display: true,
-                            position: "left"
+                        scales: {
+                            yAxes: [{
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: "Prevalence"
+                                }
+                            }]
                         }
                     }
                 });
@@ -103,10 +107,16 @@ function AppModel() {
         return self.mode() == "scenario"
             && self.currentScenario() == "results";
     });
+    self.hasResults = ko.computed(function() {
+        //return true;
+        return self.scenarios().length > 0;
+    }, self);
 
     self.showResults = function() {
+        self.results.render();
         return self.currentScenario("results");
     };
+    //self.showResults();
 }
 
 function Country(name, regions) {

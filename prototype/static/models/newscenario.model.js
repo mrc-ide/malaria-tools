@@ -48,7 +48,6 @@ function NewScenario(countries, parent) {
 	};
 
 	self.clear = function() {
-		console.log("Cleared");
 		self.name(null);
 		self.selectedCountry(null);
 		self.selectedRegion(null);

@@ -1,0 +1,53 @@
+<div data-bind="ifnot: hasResults">
+    <div class="row p-5">
+        <div class="col-12">
+            <h4>You haven't created any scenarios yet.</h4>
+            <h4 data-bind="with: newScenario">
+                <a href="#"
+                   class="d-inline"
+                   data-bind="click: clear"
+                   data-toggle="modal"
+                   data-target="#new-scenario">
+                    Create scenario
+                </a>
+            </h4>
+        </div>
+    </div>
+</div>
+
+
+<div data-bind="if: hasResults">
+    <div class="row">
+        <div class="col-12 p-5">
+            <h1>Prevalence</h1>
+            <div class="mt-5" style="width: 700px;">
+                <canvas class="prevalence"></canvas>
+            </div>
+
+            <h1>Prevalence 0-5</h1>
+            <div class="mt-5" style="width: 700px;">
+                <canvas class="prevalence0-5"></canvas>
+            </div>
+
+            <h1>Clinical incidence</h1>
+            <div class="mt-5" style="width: 700px;">
+                <canvas class="clinical-incidence"></canvas>
+            </div>
+
+            <h1>Severe disease incidence</h1>
+            <div class="mt-5" style="width: 700px;">
+                <canvas class="severe-incidence"></canvas>
+            </div>
+
+            <h1>Mortality</h1>
+            <div class="mt-5" style="width: 700px;">
+                <canvas class="mortality"></canvas>
+            </div>
+
+            <h1>Entomological innoculation rate</h1>
+            <div class="mt-5" style="width: 700px;">
+                <canvas class="eir"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
