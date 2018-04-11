@@ -35,7 +35,7 @@ html, body {
     height: 50px;
 }
 
-.scenario-bar, .section-bar, .country-bar, .region-bar {
+.scenario-bar, .section-bar, .country-bar, .region-bar, .results-bar {
     -webkit-transition: width 500s ease;
     -moz-transition: width 500s ease;
     -o-transition: width 500ms ease;
