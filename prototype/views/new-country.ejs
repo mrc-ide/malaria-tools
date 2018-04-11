@@ -2,9 +2,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="mt-3">
+                <div class="mt-5 mb-5">
                     <h5>Enter a name for this new baseline data set</h5>
-                    <input type="text" data-bind="value: newCountry().name"/>
+                    <input type="text" class="form-control rounded-0"
+                           data-bind="value: newCountry().name"/>
                 </div>
             </div>
             <div class="modal-footer">
@@ -23,17 +24,23 @@
 </div>
 
 <div id="choose-country" class="modal fade" role="dialog" data-bind="if: showScenarioSection">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-lg" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="mt-3">
-                    <h5>Enter a name for this new baseline data set</h5>
-                    <input type="text" data-bind="value: newCountry().name"/>
-                </div>
-                <hr/>
-                <div class="mt-3" data-bind="with: currentScenario">
-                    <h5>Or use an existing region</h5>
-                    <%- include('country-chooser') %>
+                <div class="row">
+                    <div class="col-6 border-right">
+                        <div class="m-3">
+                            <h5>Enter a name for this new baseline data set</h5>
+                            <input type="text" class="form-control rounded-0" data-bind="value: newCountry().name"/>
+                        </div>
+                    </div>
+
+                    <div class="col-6" data-bind="with: currentScenario">
+                        <div class="m-3">
+                            <h5>Or use an existing region</h5>
+                            <%- include('country-chooser') %>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
