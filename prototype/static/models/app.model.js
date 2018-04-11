@@ -99,6 +99,10 @@ function AppModel() {
             && self.currentScenario() 
             && self.currentScenario() != "results";
     }, self);
+    self.showResultsSection = ko.computed(function() {
+        return self.mode() == "scenario"
+               self.currentScenario() == "results";
+    });
 
     self.showResults = function() {
         return self.currentScenario("results");
