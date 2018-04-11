@@ -5,6 +5,7 @@ html, body {
 .sidebar {
     float: left;
     min-height: 100%;
+    height: auto;
     overflow-x: hidden;
 }
 
@@ -13,8 +14,8 @@ html, body {
 }
 
 .mode-bar ul {
-    top: 109px;
-    left: -72px;
+    top: 101px;
+    left: -66px;
     transform: rotate(+90deg);
     transform-origin: top;
     position: fixed;
