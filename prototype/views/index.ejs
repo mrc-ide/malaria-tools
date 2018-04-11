@@ -55,7 +55,8 @@
         <li class="nav-item"><a class="nav-link" href="#"
                                 data-toggle="toggle"
                                 data-target="#regions"
-                                data-bind="text: name, click: function() {
+                                data-bind="css: { active: $root.currentCountry() == $data },
+                                 text: name, click: function() {
                                  $parent.currentCountry($data);
                                  console.log($parent.currentCountry())}"></a></li>
     </ul>

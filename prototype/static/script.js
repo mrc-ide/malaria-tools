@@ -5,17 +5,16 @@ $(function () {
 
         $(".section-bar").find(".active").removeClass("active");
         $(".section-bar").find("a").first().addClass("active");
+        $('.tab-pane').removeClass('active show');
         $("#interventions").addClass('active show');
     });
 
     $("[data-toggle='toggle']").click(function () {
-
         var selector = $(this).data("target");
         var selectorToClose = $(this).data("close");
         $(selectorToClose).removeClass('in');
         $(selector).addClass('in');
-        $(this).closest("ul").find("a").removeClass("active");
-        $(this).addClass("active");
+        $('.form-group').removeClass("active");
     });
 
     $("[data-toggle='custom-tab']").click(function () {
