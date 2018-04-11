@@ -6,19 +6,16 @@
     <ul class="list-inline">
         <li class="list-inline-item">
             <a class="nav-link" href="#"
-               data-toggle="toggle"
-               data-target="#scenario-bar"
-               data-close="#country-bar, #regions">Scenarios</a>
+               data-bind="css: { active: mode() == 'scenario'}, click: function() { mode('scenario')}">
+                Scenarios</a>
         </li>
         <li class="list-inline-item" style="margin-left: -13px;">
             <a class="nav-link" href="#"
-               data-toggle="toggle"
-               data-target="#country-bar"
-               data-close="#scenario-bar, #sections">Countries</a>
+               data-bind="css: { active: mode() == 'country'}, click: function() { mode('country')}">Countries</a>
         </li>
     </ul>
 </div>
-<div class="scenario-bar sidebar" id="scenario-bar">
+<div class="scenario-bar sidebar" data-bind="css: { in: mode() == 'scenario'}" id="scenario-bar">
     <div class="add-open border-bottom">
         <a href="#" class="d-inline" data-toggle="modal" data-target="#new-scenario">
             +
@@ -27,20 +24,22 @@
             <%- include('open-icon') %>
         </a>
     </div>
-    <ul class="nav flex-column" id="scenarios">
-        <li class="nav-item"><a class="nav-link" href="#" data-toggle="toggle" data-target="#sections">Scenario
-                1</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" data-toggle="toggle" data-target="#sections">Scenario
-                2</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" data-toggle="toggle" data-target="#sections">Scenario
-                3</a></li>
+    <ul class="nav flex-column" id="scenarios" data-bind="foreach: scenarios">
+        <li class="nav-item">
+            <a class="nav-link" href="#"
+               data-bind="text: name, css: { active: $root.currentScenario() == $data },
+               click: function() {
+               $root.currentScenario($data);
+               }">
+            </a>
+        </li>
     </ul>
     <ul class="nav flex-column border-top">
         <li class="nav-item"><a class="nav-link" href="#">Results
             </a></li>
     </ul>
 </div>
-<div class="country-bar sidebar" id="country-bar">
+<div class="country-bar sidebar" data-bind="css: { in: mode() == 'country'}" id="country-bar">
     <div class="add-open border-bottom">
         <a href="#" class="d-inline"
            data-toggle="modal"
@@ -58,10 +57,12 @@
                                 data-bind="css: { active: $root.currentCountry() == $data },
                                  text: name, click: function() {
                                  $parent.currentCountry($data);
-                                 console.log($parent.currentCountry())}"></a></li>
+                                 $parent.currentRegion($data.regions()[0])
+                                 }"></a></li>
     </ul>
 </div>
-<div class="section-bar sidebar bg-light" id="sections">
+<div class="section-bar sidebar bg-light" data-bind="css: { in: mode() == 'scenario' && currentScenario()}"
+     id="sections">
     <ul class="nav flex-column border-top">
         <li class="nav-item">
             <a id="interventions-tab" class="nav-link" href="#interventions"
@@ -71,11 +72,11 @@
                data-toggle="tab">Baseline</a></li>
     </ul>
 </div>
-<div class="region-bar sidebar bg-light" id="regions">
+<div class="region-bar sidebar bg-light" id="regions" data-bind="css: { in: mode() == 'country' && currentCountry()}">
     <div data-bind="with: currentCountry">
         <ul class="nav flex-column border-top" data-bind="foreach: regions">
             <li class="nav-item"><a class="nav-link"
-                                    data-bind="text: $data"
+                                    data-bind="text: $data, css: { active: $root.currentRegion() == $data }"
                                     data-toggle="tab"
                                     href="#baseline"></a></li>
         </ul>
