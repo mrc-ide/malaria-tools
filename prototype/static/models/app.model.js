@@ -14,7 +14,7 @@ function AppModel() {
 	self.countries = ko.observableArray(countryObjects);
 	self.scenarios = ko.observableArray([]);
 
-	self.currentScenario = ko.observable();
+	self.currentScenario = ko.observable("results");
 
 	self.currentCountry = ko.observable(self.countries()[0]);
 	self.currentRegion = ko.observable(self.currentCountry().regions()[0]);
@@ -93,6 +93,16 @@ function AppModel() {
 
         }
     }
+
+    self.showScenarioSection = ko.computed(function() {
+        return self.mode() == "scenario"
+            && self.currentScenario() 
+            && self.currentScenario() != "results";
+    }, self);
+
+    self.showResults = function() {
+        return self.currentScenario("results");
+    };
 }
 
 function Country(name, regions) {

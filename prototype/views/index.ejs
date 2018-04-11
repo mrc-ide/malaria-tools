@@ -50,8 +50,14 @@
         </li>
     </ul>
     <ul class="nav flex-column border-top">
-        <li class="nav-item"><a class="nav-link" href="#">Results
-            </a></li>
+        <li class="nav-item">
+            <a class="nav-link" 
+               href="#"
+               data-bind="css: { active: $root.currentScenario() == 'results' },
+                          click: showResults">
+               Results
+           </a>
+        </li>
     </ul>
 </div>
 <div class="country-bar sidebar" data-bind="css: { in: mode() == 'country'}" id="country-bar">
@@ -74,7 +80,7 @@
                                  }"></a></li>
     </ul>
 </div>
-<div class="section-bar sidebar bg-light" data-bind="css: { in: mode() == 'scenario' && currentScenario()}"
+<div class="section-bar sidebar bg-light" data-bind="css: { in: showScenarioSection }"
      id="sections">
     <ul class="nav flex-column border-top">
         <li class="nav-item">
@@ -120,11 +126,11 @@
             </div>
         </div>
         <div class="tab-pane" id="interventions"
-             data-bind="css: {active: scenarioMode() == 'intervention' && mode() == 'scenario' && currentScenario()}">
+             data-bind="css: {active: scenarioMode() == 'intervention' && showScenarioSection() }">
             <%- include('edit-scenario') %>
         </div>
         <div class="tab-pane" id="scenario-baseline"
-             data-bind="css: {active: scenarioMode() == 'baseline' && mode() == 'scenario' && currentScenario()}">
+             data-bind="css: {active: scenarioMode() == 'baseline' && showScenarioSection() }">
             <%- include('baseline') %>
         </div>
         <div class="tab-pane" id="region-baseline"
