@@ -9,6 +9,10 @@ html, body {
     overflow-y: auto;
 }
 
+.modal-dialog-lg {
+    max-width: 800px !important;
+}
+
 .mode-bar {
     width: 38px;
 }
