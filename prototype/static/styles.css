@@ -4,9 +4,9 @@ html, body {
 
 .sidebar {
     float: left;
-    min-height: 100%;
-    height: auto;
+    height: 100%;
     overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .mode-bar {
@@ -40,7 +40,7 @@ html, body {
     border: 0;
 }
 
-.section-bar, .region-bar {
+.section-bar {
     padding-top: 49px;
 }
 

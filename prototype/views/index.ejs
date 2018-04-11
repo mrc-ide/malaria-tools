@@ -37,6 +37,7 @@
                data-bind="css: { active: $root.currentScenario() == $data },
                click: function() {
                $root.currentScenario($data);
+               $root.selectedCountry($data.country);
                }">
                 <div data-bind="text: name"></div>
                 <small>
@@ -61,16 +62,6 @@
     </ul>
 </div>
 <div class="country-bar sidebar" data-bind="css: { in: mode() == 'country'}" id="country-bar">
-    <div class="add-open border-bottom">
-        <a href="#" class="d-inline"
-           data-toggle="modal"
-           data-target="#new-country">
-            +
-        </a>
-        <a href="#" class="d-inline">
-            <%- include('open-icon') %>
-        </a>
-    </div>
     <ul class="nav flex-column" id="countries" data-bind="foreach: countries">
         <li class="nav-item"><a class="nav-link" href="#"
                                 data-bind="css: { active: $root.currentCountry() == $data },
@@ -131,11 +122,11 @@
         </div>
         <div class="tab-pane" id="scenario-baseline"
              data-bind="css: {active: scenarioMode() == 'baseline' && showScenarioSection() }">
-            <%- include('baseline') %>
+            <%- include('baseline-scenario') %>
         </div>
         <div class="tab-pane" id="region-baseline"
              data-bind="css: {active: mode() == 'country' && currentRegion()}">
-            <%- include('baseline') %>
+            <%- include('baseline-country') %>
         </div>
         <div class="tab-pane" id="edit-region">
             <%- include('edit-region') %>
