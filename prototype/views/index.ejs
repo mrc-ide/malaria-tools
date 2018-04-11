@@ -52,12 +52,12 @@
     </ul>
     <ul class="nav flex-column border-top">
         <li class="nav-item">
-            <a class="nav-link" 
+            <a class="nav-link"
                href="#"
                data-bind="css: { active: $root.currentScenario() == 'results' },
                           click: showResults">
-               Results
-           </a>
+                Results
+            </a>
         </li>
     </ul>
 </div>
@@ -89,9 +89,9 @@
         <ul class="nav flex-column border-top" data-bind="foreach: regions">
             <li class="nav-item"><a class="nav-link"
                                     href="#"
-                                    data-bind="text: $data,
+                                    data-bind="text: $data.name,
                                      css: { active: $root.currentRegion() == $data },
-                                     click: function () {$root.currentRegion($data);}"
+                                     click: function () {$root.currentRegion($data); $root.regionMode('view')}"
                 ></a></li>
         </ul>
     </div>
@@ -101,22 +101,28 @@
     <div class="tab-content">
         <div class="tab-pane" id="no-scenario"
              data-bind="css: { active: showResultsSection }">
-             <%- include('results') %>
+            <%- include('results') %>
         </div>
         <div class="tab-pane" id="interventions"
              data-bind="css: {active: scenarioMode() == 'intervention' && showScenarioSection() }">
             <%- include('edit-scenario') %>
         </div>
-        <div class="tab-pane" id="scenario-baseline"
-             data-bind="css: {active: scenarioMode() == 'baseline' && showScenarioSection() }">
-            <%- include('baseline-scenario') %>
-        </div>
-        <div class="tab-pane" id="region-baseline"
-             data-bind="css: {active: mode() == 'country' && currentRegion()}">
-            <%- include('baseline-country') %>
-        </div>
-        <div class="tab-pane" id="edit-region">
-            <%- include('edit-region') %>
+
+        <div class="tab-pane" id="baseline"
+             data-bind="css: {active: scenarioMode() == 'baseline' && showScenarioSection()
+             || mode() == 'country' && currentRegion() }">
+            <div class="row">
+                <div class="col-12 p-5">
+                    <%- include('baseline-country') %>
+                    <%- include('baseline-scenario') %>
+                    <div data-bind="if: regionMode() == 'view'">
+                        <%- include('baseline-view') %>
+                    </div>
+                    <div data-bind="if: regionMode() == 'edit'">
+                        <%- include('baseline-edit') %>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -125,6 +131,5 @@
 <%- include('new-country') %>
 
 <%- include('scripts') %>
-
 </body>
 </html>

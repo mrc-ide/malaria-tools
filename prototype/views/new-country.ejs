@@ -33,6 +33,17 @@
                             <h5>Enter a name for this new baseline data set</h5>
                             <input type="text" class="form-control rounded-0" data-bind="value: newCountry().name"/>
                         </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button class="btn btn-primary rounded-0"
+                                        data-toggle="modal"
+                                        data-target="#choose-country"
+                                        data-bind="click: addCountry">Save
+                                </button>
+                                <button class="btn btn-light rounded-0" data-toggle="modal" data-target="#choose-country">Cancel
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-6" data-bind="with: currentScenario">
@@ -40,20 +51,20 @@
                             <h5>Or use an existing region</h5>
                             <%- include('country-chooser') %>
                         </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button class="btn btn-primary rounded-0"
+                                        data-toggle="modal"
+                                        data-target="#choose-country">Save
+                                </button>
+                                <button class="btn btn-light rounded-0" data-toggle="modal" data-target="#choose-country">Cancel
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <div>
-                    <button class="btn btn-primary rounded-0"
-                            data-toggle="modal"
-                            data-target="#choose-country"
-                            data-bind="click: addCountry">Save
-                    </button>
-                    <button class="btn btn-light rounded-0" data-toggle="modal" data-target="#choose-country">Cancel
-                    </button>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>

@@ -1,0 +1,70 @@
+<p data-bind="if: currentCountry().editable">
+    <a href="#" class="mb-5" data-bind="click: function() {regionMode('view'); drawLine(); drawPie();}">View</a>
+</p>
+
+<form class="mt-4">
+    <div class="form-group row">
+        <div class="col-4">
+            <label>Year</label>
+            <input class="form-control rounded-0" type="number"
+                   data-bind="value: currentRegion().year"/>
+        </div>
+        <div class="col-4">
+            <label>Age start</label>
+            <input class="form-control rounded-0" type="number"
+                   data-bind="value: currentRegion().ageStart"/>
+        </div>
+        <div class="col-4">
+            <label>Age end</label>
+            <input class="form-control rounded-0" type="number"
+                   data-bind="value: currentRegion().ageEnd"/>
+        </div>
+    </div>
+    <hr class="mt-5 mb-4"/>
+    <h5>Vectors</h5>
+    <div class="form-group row">
+        <div class="col-4">
+            <label>Funestus</label>
+            <input class="form-control rounded-0"
+                   type="number"
+                   data-bind="css: {'is-invalid': !validVectors()}, value: currentRegion().vectors().f"/>
+        </div>
+        <div class="col-4">
+            <label>Arabiensis</label>
+            <input class="form-control rounded-0"
+                   type="number"
+                   data-bind="css: {'is-invalid': !validVectors()}, value: currentRegion().vectors().a"/>
+        </div>
+        <div class="col-4">
+            <label>Gambiae</label>
+            <input class="form-control rounded-0"
+                   type="number"
+                   data-bind="css: {'is-invalid': !validVectors()}, value: currentRegion().vectors().g"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12">
+            <div class="invalid-feedback d-block" data-bind="if: !validVectors()">
+                Vector percentages must sum to 100
+            </div>
+        </div>
+    </div>
+</form>
+<hr class="mt-5 mb-4"/>
+<h5>Past ITN Use</h5>
+<form>
+    <div class="form-group row">
+        <label class="col-5 col-form-label">2013</label>
+        <div class="col-7">
+            <input type="number" value="50"
+                   id="2013-coverage"
+                   data-role="slider-value"
+                   data-target="#2013-slider"/>
+        </div>
+    </div>
+
+</form>
+<div class="slider"
+     data-control="#2013-coverage"
+     data-initial="50"
+     id="2013-slider"></div>

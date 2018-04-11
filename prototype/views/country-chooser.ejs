@@ -9,7 +9,7 @@
             <div class="collapse">
                 <ul class="list-group" data-bind="foreach: regions">
                     <li class="list-group-item"
-                        data-bind="text: $data,
+                        data-bind="text: $data.name,
                                                        click: $parents[1].selectRegion,
                                                        css: { active: $parents[1].isActive($data) }">
                     </li>

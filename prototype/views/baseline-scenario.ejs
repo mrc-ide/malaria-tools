@@ -1,27 +1,5 @@
-<div class="row">
-    <div class="col-12 p-5">
-        <h5>Baseline data for <span data-bind="text: showScenarioSection() && currentScenario().region"></span>,
-            <span data-bind="text: showScenarioSection() && currentScenario().country().name"></span></h5>
-        <p class="mb-5">
-            <a href="#" data-toggle="modal"
-               data-target="#choose-country">Edit</a></p>
-        <div class="text-secondary">
-            <div class="d-inline mr-3 text-secondary">
-                <strong>Year</strong>: 2013
-            </div>
-            <div class="d-inline mr-3">
-                <strong>Age range</strong>: 0 - 5
-            </div>
-            <div class="d-inline mr-3">
-                <strong>Model estimated baseline under 5 prevalence</strong>:42.6
-            </div>
-        </div>
-
-        <div class="mt-5" style="width: 700px;">
-            <canvas class="seasonal"></canvas>
-        </div>
-        <div style="width: 400px; height: 400px" class="mt-5">
-            <canvas class="vectors"></canvas>
-        </div>
-    </div>
+<div data-bind="if: mode() == 'scenario'">
+    <h5>Baseline data for <span data-bind="text: showScenarioSection() && currentScenario().region()
+    && currentScenario().region().name + ','"></span>
+        <span data-bind="text: showScenarioSection() && currentScenario().country().name"></span></h5>
 </div>

@@ -99,6 +99,10 @@ input[type='number'] {
     width: 50px;
 }
 
+input[type='number'].form-control {
+    width: 80px;
+}
+
 .custom-tabs .tab-pane {
     display: none;
 }
