@@ -108,15 +108,17 @@ function AppModel() {
             && self.currentScenario() == "results";
     });
     self.hasResults = ko.computed(function() {
-        //return true;
         return self.scenarios().length > 0;
+    }, self);
+    self.showResultsSidebar = ko.computed(function() {
+        return self.showResultsSection() 
+            && self.hasResults();
     }, self);
 
     self.showResults = function() {
         self.results.render();
         return self.currentScenario("results");
     };
-    //self.showResults();
 }
 
 function Country(name, regions) {

@@ -1,6 +1,21 @@
 function Results() {
     var self = this;
 
+    self.graphs = ko.observableArray([
+        new ResultsGraph("prevalence", "Prevalence"),
+        new ResultsGraph("prevalence0-5", "Prevalence 0-5"),
+        new ResultsGraph("clinical-incidence", "Clinical incidence"),
+        new ResultsGraph("severe-incidence", "Severe disease incidence"),
+        new ResultsGraph("mortality", "Mortality"),
+        new ResultsGraph("eir", "Entomological innoculation rate")
+    ]);
+    self.currentGraph = ko.observable(self.graphs()[0]);
+
+    self.selectGraph = function(graph) {
+        self.currentGraph(graph);
+        self.render();
+    }
+
     var renderChart = function(target, yLabel, xLabel) {
         return new Chart($(target), {
             type: 'line',
@@ -43,23 +58,14 @@ function Results() {
 
 
     self.render = function() {
-        $.each($('.prevalence'), function() { 
-            renderChart(this, "Prevalence", "? Unknown ?"); 
-        });
-        $.each($('.prevalence0-5'), function() { 
-            renderChart(this, "Prevalence 0-5", "? Unknown ?"); 
-        });
-        $.each($('.clinical-incidence'), function() { 
-            renderChart(this, "Clinical incidence", "? Unknown ?"); 
-        });
-        $.each($('.severe-incidence'), function() { 
-            renderChart(this, "Severe disease incidence", "? Unknown ?"); 
-        });
-        $.each($('.mortality'), function() { 
-            renderChart(this, "Mortality", "? Unknown ?");
-        });
-        $.each($('.eir'), function() { 
-            renderChart(this, "Entomological innoculation rate", "? Unknown ?"); 
+        var metadata = self.currentGraph();
+        $.each($("#" + metadata.id()), function() { 
+            renderChart(this, metadata.name(), "? Unknown ?"); 
         });
     };
+}
+
+function ResultsGraph(id, name) {
+    this.id = ko.observable(id);
+    this.name = ko.observable(name);
 }

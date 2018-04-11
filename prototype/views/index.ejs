@@ -96,6 +96,20 @@
         </ul>
     </div>
 </div>
+<div class="results-bar sidebar bg-light" id="results" data-bind="css: { in: showResultsSidebar }">
+    <div data-bind="with: results">
+        <ul class="nav flex-column" data-bind="foreach: graphs">
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="#"
+                   data-bind="text: name,
+                              css: { active: $parent.currentGraph() == $data },
+                              click: $parent.selectGraph">
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
 
 <div class="contents container-fluid">
     <div class="tab-content">
