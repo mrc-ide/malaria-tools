@@ -31,6 +31,68 @@ function AppModel() {
         self.currentRegion(self.newCountry().regions()[0]);
 	};
 	self.newScenario = ko.observable(new NewScenario(countryObjects, self));
+
+    self.myLineChart = null;
+    self.myPieChart = null;
+    self.drawLine = function() {
+        if (!self.myLineChart){
+            $.each($('.seasonal'), function() {
+                self.myLineChart = new Chart($(this), {
+                    type: 'line',
+                    data: {
+                        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                        datasets: [{
+                            label: 'rainfall',
+                            borderColor: "#3e95cd",
+                            data: [12, 19, 15, 13, 10, 3, 2, 2, 4, 7, 11, 14]
+                        },
+                            {
+                                label: 'incidence',
+                                borderColor: "#8e5ea2",
+                                data: [11, 12, 18, 15, 13, 9, 4, 3, 3, 5, 8, 12]
+                            }]
+                    },
+                    options: {
+                        title: {
+                            text: "Seasonal characteristics",
+                            display: true,
+                            position: "left"
+                        }
+                    }
+                });
+            })
+        }
+    };
+
+    self.drawPie = function() {
+        if (!self.myPieChart){
+    		$.each($('.vectors'), function() {
+                self.myPieChart = new Chart($(this), {
+                    type: 'pie',
+                    data: {
+                        datasets: [{
+                            data: [20, 0, 80],
+                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"]
+                        }],
+
+                        labels: [
+                            'Funestus',
+                            'Arabiensis',
+                            'Gambiae'
+                        ]
+                    },
+                    options: {
+                        title: {
+                            text: "Vectors",
+                            display: true,
+                            position: "left"
+                        }
+                    }
+                });
+			})
+
+        }
+    }
 }
 
 function Country(name, regions) {
