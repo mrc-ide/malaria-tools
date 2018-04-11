@@ -35,11 +35,13 @@ function NewScenario(countries, parent) {
 
 	self.createScenario = function() {
 		if (self.isValid()) {
-			self.parent.scenarios.push(new Scenario(
-				self.name(),
-				self.selectedCountry(),
-				self.selectedRegion()
-			));
+			const newScenario = new Scenario(
+                self.name(),
+                self.selectedCountry(),
+                self.selectedRegion()
+            );
+			self.parent.scenarios.push(newScenario);
+			self.parent.currentScenario(newScenario);
 		} else {
 			console.log("Discarded attempt to create invalid scenario");
 		}

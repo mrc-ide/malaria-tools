@@ -9,6 +9,7 @@ function AppModel() {
 	});
 
 	self.mode = ko.observable('scenario');
+	self.scenarioMode = ko.observable('intervention');
 
 	self.countries = ko.observableArray(countryObjects);
 	self.scenarios = ko.observableArray([]);

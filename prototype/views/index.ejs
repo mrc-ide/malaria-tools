@@ -18,10 +18,10 @@
 <div class="scenario-bar sidebar" data-bind="css: { in: mode() == 'scenario'}" id="scenario-bar">
     <div class="add-open border-bottom">
         <span data-bind="with: newScenario">
-            <a href="#" 
-               class="d-inline" 
+            <a href="#"
+               class="d-inline"
                data-bind="click: clear"
-               data-toggle="modal" 
+               data-toggle="modal"
                data-target="#new-scenario">
                 +
             </a>
@@ -37,14 +37,14 @@
                click: function() {
                $root.currentScenario($data);
                }">
-               <div data-bind="text: name"></div>
-               <small>
+                <div data-bind="text: name"></div>
+                <small>
                    <span data-bind="with: country">
                         <span data-bind="text: name"></span>
                     </span>
                     <span data-bind="if: region"> – </span>
                     <span data-bind="text: region"></span>
-               </small>
+                </small>
             </a>
         </li>
     </ul>
@@ -79,11 +79,13 @@
      id="sections">
     <ul class="nav flex-column border-top">
         <li class="nav-item">
-            <a id="interventions-tab" class="nav-link" href="#interventions"
-               data-toggle="tab">Interventions</a></li>
+            <a id="interventions-tab" class="nav-link" href="#"
+               data-bind="css: {active: scenarioMode() == 'intervention'},
+               click: function() { scenarioMode('intervention')}">Interventions</a></li>
         <li class="nav-item">
             <a id="baseline-tab" class="nav-link" href="#baseline"
-               data-toggle="tab">Baseline</a></li>
+               data-bind="css: {active: scenarioMode() == 'baseline'},
+                click: function() { scenarioMode('baseline')}">Baseline</a></li>
     </ul>
 </div>
 <div class="region-bar sidebar bg-light" id="regions" data-bind="css: { in: mode() == 'country' && currentCountry()}">
@@ -99,10 +101,29 @@
 
 <div class="contents container-fluid">
     <div class="tab-content">
-        <div class="tab-pane" id="interventions">
+        <div class="tab-pane" id="no-scenario"
+             data-bind="css: {active: mode() == 'scenario' && !currentScenario()}">
+            <div class="row p-5">
+                <div class="col-12">
+                <h4>You haven't created any scenarios yet.</h4>
+                <h4 data-bind="with: newScenario">
+                    <a href="#"
+                       class="d-inline"
+                       data-bind="click: clear"
+                       data-toggle="modal"
+                       data-target="#new-scenario">
+                        Create scenario
+                    </a>
+                </h4>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="interventions"
+             data-bind="css: {active: scenarioMode() == 'intervention' && mode() == 'scenario' && currentScenario()}">
             <%- include('edit-scenario') %>
         </div>
-        <div class="tab-pane" id="baseline">
+        <div class="tab-pane" id="baseline"
+             data-bind="css: {active: scenarioMode() == 'intervention' && mode() == 'baseline'} && currentScenario()">
             <%- include('baseline') %>
         </div>
         <div class="tab-pane" id="edit-region">
