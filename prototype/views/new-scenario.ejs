@@ -7,15 +7,8 @@
             <div class="modal-body">
                 <h2>Choose a country or region</h2>
                 <div class="country-chooser">
-                    <ul>
-                        <li>Angola</li>
-                        <li>Angola</li>
-                        <li>Angola</li>
-                        <li>Angola</li>
-                        <li>Angola</li>
-                        <li>Angola</li>
-                        <li>Angola</li>
-                        <li>Angola</li>
+                    <ul data-bind="foreach: countries">
+                        <li data-bind="text: $data"></li>
                     </ul>
                 </div>
 
