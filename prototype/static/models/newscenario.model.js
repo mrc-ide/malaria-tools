@@ -6,7 +6,12 @@ function NewScenario(countries, parent) {
 	self.selectedCountry = ko.observable();
 	self.selectedRegion = ko.observable();
 	self.name = ko.observable();
-
+	self.country = ko.computed(function(){
+		return self.selectedCountry();
+	});
+    self.region = ko.computed(function(){
+        return self.selectedRegion();
+    });
 	self.selectCountry = function(country, event) {
 		self.selectedCountry(country);
 		self.selectedRegion(null);
@@ -35,13 +40,9 @@ function NewScenario(countries, parent) {
 
 	self.createScenario = function() {
 		if (self.isValid()) {
-			const newScenario = new Scenario(
-                self.name(),
-                self.selectedCountry(),
-                self.selectedRegion()
-            );
-			self.parent.scenarios.push(newScenario);
-			self.parent.currentScenario(newScenario);
+
+			self.parent.scenarios.push(self);
+			self.parent.currentScenario(self);
 		} else {
 			console.log("Discarded attempt to create invalid scenario");
 		}
