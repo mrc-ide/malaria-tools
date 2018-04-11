@@ -17,9 +17,15 @@
 </div>
 <div class="scenario-bar sidebar" data-bind="css: { in: mode() == 'scenario'}" id="scenario-bar">
     <div class="add-open border-bottom">
-        <a href="#" class="d-inline" data-toggle="modal" data-target="#new-scenario">
-            +
-        </a>
+        <span data-bind="with: newScenario">
+            <a href="#" 
+               class="d-inline" 
+               data-bind="click: clear"
+               data-toggle="modal" 
+               data-target="#new-scenario">
+                +
+            </a>
+        </span>
         <a href="#" class="d-inline">
             <%- include('open-icon') %>
         </a>
@@ -27,10 +33,18 @@
     <ul class="nav flex-column" id="scenarios" data-bind="foreach: scenarios">
         <li class="nav-item">
             <a class="nav-link" href="#"
-               data-bind="text: name, css: { active: $root.currentScenario() == $data },
+               data-bind="css: { active: $root.currentScenario() == $data },
                click: function() {
                $root.currentScenario($data);
                }">
+               <div data-bind="text: name"></div>
+               <small>
+                   <span data-bind="with: country">
+                        <span data-bind="text: name"></span>
+                    </span>
+                    <span data-bind="if: region"> – </span>
+                    <span data-bind="text: region"></span>
+               </small>
             </a>
         </li>
     </ul>

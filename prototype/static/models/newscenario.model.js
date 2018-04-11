@@ -30,7 +30,7 @@ function NewScenario(countries, parent) {
 	};
 
 	self.isValid = ko.computed(function() {
-		return this.name() && this.selectedCountry();
+		return this.name() && (this.selectedCountry() || this.selectedRegion());
 	}, this);
 
 	self.createScenario = function() {
@@ -44,4 +44,12 @@ function NewScenario(countries, parent) {
 			console.log("Discarded attempt to create invalid scenario");
 		}
 	};
+
+	self.clear = function() {
+		console.log("Cleared");
+		self.name(null);
+		self.selectedCountry(null);
+		self.selectedRegion(null);
+		$("#new-scenario").find(".collapse").collapse("hide");
+	}
 }
