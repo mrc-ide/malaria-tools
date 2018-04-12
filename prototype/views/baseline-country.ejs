@@ -1,4 +1,7 @@
 <div data-bind="if: mode() == 'country'">
-    <h5>Baseline data for <span data-bind="text: currentRegion().name"></span>,
-        <span data-bind="text: currentCountry().name"></span></h5>
+    <h5>
+    	Baseline data for 
+        <span data-bind="text: currentCountry().name"></span>
+        (<span data-bind="text: currentRegion().name"></span>)
+    </h5>
 </div>
