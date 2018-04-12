@@ -69,22 +69,12 @@ a.active {
 }
 
 input[type='checkbox'] {
-    -webkit-appearance: none;
     width: 30px;
     height: 30px;
-    background: white;
     border-radius: 5px;
     border: 2px solid #555;
     vertical-align: top;
 }
-
-input[type='checkbox']:checked {
-    background: #007bff;
-}
-
-/*input[type='number'] {*/
-    /*min-width: 5em;*/
-/*}*/
 
 .form-group.active, .settings {
     background: #e9ecef;

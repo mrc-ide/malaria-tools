@@ -34,20 +34,13 @@
     <ul class="nav flex-column" id="scenarios" data-bind="foreach: scenarios">
         <li class="nav-item">
             <input class="mt-3 mr-3 ml-2 float-left" type="checkbox" data-bind="checked: selected"/>
-            <!--<svg data-bind="css: {'d-none': !selected}" style="float: left;-->
-    <!--margin-left: -42px;-->
-    <!--margin-top: 14px;" height="32" viewBox="0 0 12 16" width="24">-->
-                <!--<path fill-rule="evenodd" d="M12 5.5l-8 8-4-4L1.5 8 4 10.5 10.5 4 12 5.5z"></path>-->
-            <!--</svg>-->
             <a class="nav-link" href="#"
                data-bind="css: { active: $root.currentScenario() == $data },
                click: function() {
                $root.currentScenario($data);
                $root.changeCountry($data.country());
                }">
-                <div>
-                    <span data-bind="text: name"></span>
-                </div>
+                <span data-bind="text: name" class="d-block"></span>
                 <small>
                    <span data-bind="with: country">
                         <span data-bind="text: name"></span>
@@ -58,7 +51,7 @@
                     </span>
                 </small>
             </a>
-            <span style="clear: right"></span>
+            <span style="clear: both"></span>
         </li>
     </ul>
     <ul class="nav flex-column border-top">
