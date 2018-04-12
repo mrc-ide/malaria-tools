@@ -33,7 +33,9 @@
     </div>
     <ul class="nav flex-column" id="scenarios" data-bind="foreach: scenarios">
         <li class="nav-item">
-            <input class="mt-3 mr-3 ml-2 float-left" type="checkbox" data-bind="checked: selected"/>
+            <div class="mt-3 ml-3 float-left" style="height: 40px;">
+                <input type="checkbox" data-bind="checked: selected"/>
+            </div>
             <a class="nav-link" href="#"
                data-bind="css: { active: $root.currentScenario() == $data },
                click: function() {
@@ -42,13 +44,12 @@
                }">
                 <span data-bind="text: name" class="d-block"></span>
                 <small>
-                   <span data-bind="with: country">
+                    <div data-bind="with: country">
                         <span data-bind="text: name"></span>
-                    </span>
-                    <span data-bind="if: region"> – </span>
-                    <span data-bind="with: region">
+                    </div>
+                    <div data-bind="with: region">
                         <span data-bind="text: name"></span>
-                    </span>
+                    </div>
                 </small>
             </a>
             <span style="clear: both"></span>

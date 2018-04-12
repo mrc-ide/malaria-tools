@@ -19,11 +19,11 @@ function AppModel() {
 
     self.countries = ko.observableArray(countryObjects);
     self.scenarios = ko.observableArray([
-        new Scenario("Scenario 1", countryObjects[0], countryObjects[0].regions()[0]),
+        /*new Scenario("Scenario 1", countryObjects[0], countryObjects[0].regions()[0]),
         new Scenario("Scenario 2", countryObjects[0], countryObjects[0].regions()[3]),
         new Scenario("Scenario 3", countryObjects[0], countryObjects[0].regions()[1]),
         new Scenario("Scenario 4", countryObjects[0], countryObjects[0].regions()[2]),
-        new Scenario("Scenario 5", countryObjects[1], countryObjects[0].regions()[0])
+        new Scenario("Scenario 5", countryObjects[1], countryObjects[0].regions()[0])*/
     ]);
 
     self.currentScenario = ko.observable("results");
