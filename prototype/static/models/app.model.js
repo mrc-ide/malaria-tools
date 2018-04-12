@@ -39,6 +39,14 @@ function AppModel() {
     };
     self.newScenario = ko.observable(new NewScenario(countryObjects, self));
 
+    self.changeCountry = function (data) {
+        self.currentCountry(data);
+        self.currentRegion(data.regions()[0]);
+        self.regionMode('view');
+        self.drawLine();
+        self.drawPie();
+    };
+
     self.validVectors = ko.computed(function () {
         var total = parseInt(self.currentRegion().vectors().f())
             + parseInt(self.currentRegion().vectors().a())

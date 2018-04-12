@@ -38,6 +38,7 @@
                click: function() {
                $root.currentScenario($data);
                $root.selectedCountry($data.country);
+               $root.regionMode('view');
                }">
                 <div data-bind="text: name"></div>
                 <small>
@@ -66,8 +67,8 @@
         <li class="nav-item"><a class="nav-link" href="#"
                                 data-bind="css: { active: $root.currentCountry() == $data },
                                  text: name, click: function() {
-                                 $parent.currentCountry($data);
-                                 $parent.currentRegion($data.regions()[0])
+                                 $parent.changeCountry($data);
+
                                  }"></a></li>
     </ul>
 </div>
