@@ -10,6 +10,7 @@ function Results(app) {
         new ResultsGraph("eir", "Entomological innoculation rate")
     ]);
     self.currentGraph = ko.observable(self.graphs()[0]);
+    self.app = ko.observable(app);
 
     self.selectGraph = function(graph) {
         self.currentGraph(graph);
@@ -78,12 +79,19 @@ function Results(app) {
     }
 
 
-    self.render = function() {
-        var metadata = self.currentGraph();
-        $.each($("#" + metadata.id()), function() { 
-            renderChart(this, app.selectedScenarios(), metadata.name(), "? Unknown ?"); 
-        });
-    };
+    self.render = ko.computed(function() {
+        if (this.app().showResultsSection()) {
+            var metadata = this.currentGraph();
+            var selectedScenarios = this.app().selectedScenarios();
+            //console.log("Rendering " + metadata.name() + " for " + selectedScenarios.length + " scenarios");
+            $.each($("#results-graph"), function() { 
+                renderChart(this, selectedScenarios, metadata.name(), "? Unknown ?"); 
+            });
+            return true;
+        } else {
+            return false;
+        }
+    }, self);
 }
 
 function ResultsGraph(id, name) {

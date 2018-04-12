@@ -16,7 +16,6 @@ function AppModel() {
     self.mode = ko.observable('scenario');
     self.scenarioMode = ko.observable('intervention');
     self.regionMode = ko.observable('view');
-    self.results = new Results(self);
 
     self.countries = ko.observableArray(countryObjects);
     self.scenarios = ko.observableArray([
@@ -28,7 +27,6 @@ function AppModel() {
         new Scenario("Scenario 6", countryObjects[5], null),
         new Scenario("Scenario 7", countryObjects[6], null),
         new Scenario("Scenario 8", countryObjects[7], null),
-        new Scenario("Scenario 9", countryObjects[8], null)
     ]);
 
     self.currentScenario = ko.observable("results");
@@ -182,7 +180,6 @@ function AppModel() {
     }, self);
 
     self.showResults = function () {
-        self.results.render();
         return self.currentScenario("results");
     };
 
@@ -200,7 +197,8 @@ function AppModel() {
         var scenario = self.currentScenario();
         scenario.country(self.newScenario().selectedCountry());
         scenario.region(self.newScenario().selectedRegion());
-    };
+    }
 
+    self.results = new Results(self);
     self.initSliders();
 }
