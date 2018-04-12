@@ -27,6 +27,7 @@ function AppModel() {
     self.newCountry = ko.computed(function () {
         return new Country(self.selectedCountry().name + "-1", regionObjects, true)
     });
+
     self.addCountry = function () {
         self.countries.push(self.newCountry());
         self.countries.sort(function (left, right) {
@@ -36,6 +37,7 @@ function AppModel() {
         self.currentCountry(self.newCountry());
         self.currentRegion(self.newCountry().regions()[0]);
         self.mode('country');
+        self.regionMode('edit');
     };
     self.newScenario = ko.observable(new NewScenario(countryObjects, self));
 
@@ -47,13 +49,12 @@ function AppModel() {
         self.drawPie();
     };
 
-    self.validVectors = ko.computed(function () {
-        var total = parseInt(self.currentRegion().vectors().f())
-            + parseInt(self.currentRegion().vectors().a())
-            + parseInt(self.currentRegion().vectors().g());
-
-        return total === 100;
-    });
+    self.changeRegion = function (data) {
+        self.currentRegion(data);
+        self.regionMode('view');
+        self.drawLine();
+        self.drawPie();
+    };
 
     self.drawLine = function () {
         $.each($('.seasonal'), function () {
@@ -136,19 +137,4 @@ function AppModel() {
         self.results.render();
         return self.currentScenario("results");
     };
-}
-
-function Country(name, regions, editable) {
-    this.name = name;
-    this.regions = ko.observableArray(regions);
-    this.editable = editable;
-}
-
-
-function Region(name, year, ageStart, ageEnd, vectors) {
-    this.name = name;
-    this.year = ko.observable(year);
-    this.ageStart = ko.observable(ageStart);
-    this.ageEnd = ko.observable(ageEnd);
-    this.vectors = ko.observable(vectors);
 }
