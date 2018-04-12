@@ -30,6 +30,30 @@ function AppModel() {
     self.newScenario = ko.observable(new NewScenario(countryObjects, self));
     self.newCountryForm = ko.observable(new NewCountryForm(self));
 
+    self.initSliders = function() {
+
+        $(".slider").slider({
+            create: function (event, ui) {
+                $(this).slider('value', $(this).data('initial'));
+            },
+            change: function (event, ui) {
+
+                var selector = $(this).data("control");
+                $(selector)
+                    .val(ui.value);
+            },
+            range: "min"
+        });
+
+        $("[data-role=slider-value]").change(function (e) {
+            var selector = $(this).data("target");
+            var slider = $(selector);
+            if (e.target.value !== slider.slider("value"))
+                slider.slider("value", e.target.value);
+
+        });
+    }
+
     self.changeCountry = function (data) {
         self.currentCountry(data);
         self.currentRegion(data.regions()[0]);
@@ -43,6 +67,7 @@ function AppModel() {
         self.regionMode('view');
         self.drawLine();
         self.drawPie();
+        self.initSliders();
     };
 
     self.baselineCountry = ko.computed(function() {
@@ -54,6 +79,7 @@ function AppModel() {
             return null;
         }
     }, self);
+
     self.canEditCountry = ko.computed(function() {
         if (self.baselineCountry()) {
             return self.baselineCountry().editable;
@@ -135,7 +161,7 @@ function AppModel() {
         return self.scenarios().length > 0;
     }, self);
     self.showResultsSidebar = ko.computed(function() {
-        return self.showResultsSection() 
+        return self.showResultsSection()
             && self.hasResults();
     }, self);
 
@@ -159,4 +185,6 @@ function AppModel() {
         scenario.country(self.newScenario().selectedCountry());
         scenario.region(self.newScenario().selectedRegion());
     };
+
+    self.initSliders();
 }

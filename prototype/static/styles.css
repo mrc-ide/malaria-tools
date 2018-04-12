@@ -82,9 +82,9 @@ input[type='checkbox']:checked {
     background: #007bff;
 }
 
-input[type='number'] {
-    min-width: 5em;
-}
+/*input[type='number'] {*/
+    /*min-width: 5em;*/
+/*}*/
 
 .form-group.active, .settings {
     background: #e9ecef;

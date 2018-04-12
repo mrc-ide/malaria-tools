@@ -109,12 +109,6 @@
         <div class="tab-pane p-5 settings" id="settings-ipt">
             <form>
                 <div class="form-group row">
-                    <label for="ipt-start-year" class="col-5 col-form-label">Start year</label>
-                    <div class="col-7">
-                        <input type="number" value="0" id="ipt-start-year" />
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label class="col-5 col-form-label">Target coverage</label>
                     <div class="col-7">
                         <input type="number" value="50"
@@ -129,17 +123,20 @@
                 data-initial="50"
                 id="ipt-slider">
             </div>
+            <form class="mt-5">
+                <div class="form-group row">
+                    <label for="ipt-start-year" class="col-5 col-form-label">Start year</label>
+                    <div class="col-7">
+                        <input type="number" value="0" id="ipt-start-year" />
+                    </div>
+                </div>
+            </form>
+
         </div>
 
         <!-- SMC -->
         <div class="tab-pane p-5 settings" id="settings-smc">
             <form>
-                <div class="form-group row">
-                    <label for="smc-start-year" class="col-5 col-form-label">Start year</label>
-                    <div class="col-7">
-                        <input type="number" value="0" id="smc-start-year" />
-                    </div>
-                </div>
                 <div class="form-group row">
                     <label class="col-5 col-form-label">Target coverage</label>
                     <div class="col-7">
@@ -155,6 +152,14 @@
                 data-initial="50"
                 id="smc-slider">
             </div>
+            <form class="mt-5">
+                <div class="form-group row">
+                    <label for="smc-start-year" class="col-5 col-form-label">Start year</label>
+                    <div class="col-7">
+                        <input type="number" value="0" id="smc-start-year" />
+                    </div>
+                </div>
+            </form>
         </div>
 
         <!-- Mass treatment -->
@@ -170,12 +175,12 @@
                     </div>
                 </div>
             </form>            
-            <div class="slider mb-2"
+            <div class="slider"
                 data-control="#mass-coverage"
                 data-initial="50"
                 id="mass-slider">
             </div>
-            <form>
+            <form class="mt-5">
                 <div class="form-group row">
                     <label for="mass-interval" class="col-5 col-form-label">Interval (years)</label>
                     <div class="col-7">
@@ -191,8 +196,8 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="mass-screen" class="col-5 col-form-label">Screen with a Rapid Diagonistic Test (MSAT)</label>
-                    <div class="col-7">
+                    <label for="mass-screen" class="col-9 col-form-label">Screen with a Rapid Diagonistic Test (MSAT)</label>
+                    <div class="col-3">
                         <input type="checkbox" checked="checked" id="mass-screen" />
                     </div>
                 </div>
@@ -202,15 +207,15 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="mass-arte" class="col-5 col-form-label">Artemether/lumefrantine</label>
-                    <div class="col-7">
+                    <label for="mass-arte" class="col-9 col-form-label">Artemether/lumefrantine</label>
+                    <div class="col-3">
                         <input type="checkbox" checked="checked" id="mass-arte" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="mass-dha" class="col-5 col-form-label">DHA-piperaquine</label>
-                    <div class="col-7">
+                    <label for="mass-dha" class="col-9 col-form-label">DHA-piperaquine</label>
+                    <div class="col-3">
                         <input type="checkbox" id="mass-dha" />
                     </div>
                 </div>

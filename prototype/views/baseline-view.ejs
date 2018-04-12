@@ -1,6 +1,6 @@
 <p>
   <span data-bind="if: canEditCountry">
-      <a href="#" class="mb-5" data-bind="click: function() {regionMode('edit')}">Edit</a>
+      <a href="#" class="mb-5" data-bind="click: function() {regionMode('edit'); initSliders()}">Edit</a>
   </span>
   <span data-bind="ifnot: canEditCountry">
       <a href="#" 
