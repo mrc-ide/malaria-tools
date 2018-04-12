@@ -27,6 +27,7 @@ function AppModel() {
     self.newCountry = ko.computed(function () {
         return new Country(self.selectedCountry().name + "-1", regionObjects, true)
     });
+
     self.addCountry = function () {
         self.countries.push(self.newCountry());
         self.countries.sort(function (left, right) {
@@ -36,6 +37,7 @@ function AppModel() {
         self.currentCountry(self.newCountry());
         self.currentRegion(self.newCountry().regions()[0]);
         self.mode('country');
+        self.regionMode('edit');
     };
     self.newScenario = ko.observable(new NewScenario(countryObjects, self));
 
