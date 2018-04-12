@@ -16,10 +16,20 @@ function AppModel() {
     self.mode = ko.observable('scenario');
     self.scenarioMode = ko.observable('intervention');
     self.regionMode = ko.observable('view');
-    self.results = new Results();
+    self.results = new Results(self);
 
     self.countries = ko.observableArray(countryObjects);
-    self.scenarios = ko.observableArray([]);
+    self.scenarios = ko.observableArray([
+        new Scenario("Scenario 1", countryObjects[0], null),
+        new Scenario("Scenario 2", countryObjects[1], null),
+        new Scenario("Scenario 3", countryObjects[2], null),
+        new Scenario("Scenario 4", countryObjects[3], null),
+        new Scenario("Scenario 5", countryObjects[4], null),
+        new Scenario("Scenario 6", countryObjects[5], null),
+        new Scenario("Scenario 7", countryObjects[6], null),
+        new Scenario("Scenario 8", countryObjects[7], null),
+        new Scenario("Scenario 9", countryObjects[8], null)
+    ]);
 
     self.currentScenario = ko.observable("results");
 
@@ -61,6 +71,12 @@ function AppModel() {
             return false;
         }
     }, self);
+
+    self.selectedScenarios = ko.computed(function() {
+        return self.scenarios().filter(function(s) {
+            return s.selected();
+        });
+    });
 
     self.drawLine = function () {
         $.each($('.seasonal'), function () {
