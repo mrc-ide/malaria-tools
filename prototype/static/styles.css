@@ -111,10 +111,10 @@ input[type='number'].form-control {
     display: block;
 }
 
-.contents, .tab-content, .tab-pane, .tab-pane .row {
+.contents, .tab-content, .tab-pane, .full-screen {
     height: 100%;
 }
 
-.tab-pane .row {
+.full-screen {
     overflow-y: auto;
 }

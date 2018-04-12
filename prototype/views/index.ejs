@@ -131,8 +131,8 @@
         <div class="tab-pane" id="baseline"
              data-bind="css: {active: scenarioMode() == 'baseline' && showScenarioSection()
              || mode() == 'country' && currentRegion() }">
-            <div class="row">
-                <div class="col-12 p-5">
+            <div class="full-screen">
+                <div class="p-5">
                     <%- include('baseline-country') %>
                     <%- include('baseline-scenario') %>
                     <div data-bind="visible: regionMode() == 'view'">
