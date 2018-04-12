@@ -75,6 +75,8 @@ function AppModel() {
         })
     };
 
+    self.years = ko.observableArray([2013, 2014, 2015, 2016]);
+
     self.drawPie = function () {
 
         $.each($('.vectors'), function () {

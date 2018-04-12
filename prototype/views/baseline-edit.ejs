@@ -52,19 +52,20 @@
 </form>
 <hr class="mt-5 mb-4"/>
 <h5>Past ITN Use</h5>
+<div data-bind="foreach: years">
 <form>
     <div class="form-group row">
-        <label class="col-5 col-form-label">2013</label>
+        <label class="col-5 col-form-label" data-bind="text: $data">2013</label>
         <div class="col-7">
-            <input type="number" value="50"
-                   id="2013-coverage"
-                   data-role="slider-value"
-                   data-target="#2013-slider"/>
+            <input type="number" data-bind="attr: {id: $data + '-coverage', 'data-target': '#' + $data + '-slider'}"
+                   value="50"
+                   data-role="slider-value"/>
         </div>
     </div>
 
 </form>
 <div class="slider"
-     data-control="#2013-coverage"
-     data-initial="50"
-     id="2013-slider"></div>
+     data-bind="attr: {id: $data + '-slider', 'data-control': '#' + $data + '-coverage'}"
+     data-initial="50"></div>
+
+</div>
