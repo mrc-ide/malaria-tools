@@ -2,7 +2,14 @@ function NewCountryForm(app) {
     var self = this;
 
     self.app = app;
-    self.originalName = ko.observable();
+    self.originalCountry = ko.observable();
+    self.originalName = ko.computed(function() {
+        if (this.originalCountry()) {
+            return this.originalCountry().name;
+        } else {
+            return null;
+        }
+    }, self);
     self.name = ko.observable();
     self.regions = ko.observableArray();
     self.forScenario = ko.observable();
@@ -21,22 +28,22 @@ function NewCountryForm(app) {
 
         var scenario = self.forScenario();
         if (scenario) {
-            scenario.country(country);
-            var equivalentRegion = null;
-            if (scenario.region()) {
-                equivalentRegion = country.regions().find(function(r) { 
-                    r.name == scenario.region().name 
-                });
+            scenario.changeCountry(country);
+            var relatedScenarios = self.app.scenarios().filter(function(s) { 
+                return s != scenario && s.country() == self.originalCountry();
+            });
+            if (relatedScenarios.length > 0) {
+                self.app.updateScenariosForm().setup(relatedScenarios, self.originalCountry(), country);
+                return;
             }
-            scenario.region(equivalentRegion);
         }
         self.app.regionMode('edit');
         self.app.initSliders();
     };
 
     self.setup = function(country, scenario) {
-        self.originalName(country.name);
-        self.name(country.name + "-1");
+        self.originalCountry(country);
+        self.name(country.name + " (Modified)");
         self.regions(country.regions().map(function(r) { return r.copy() }));
         if (scenario) {
             self.forScenario(scenario);

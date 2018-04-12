@@ -18,7 +18,13 @@ function AppModel() {
     self.regionMode = ko.observable('view');
 
     self.countries = ko.observableArray(countryObjects);
-    self.scenarios = ko.observableArray([]);
+    self.scenarios = ko.observableArray([
+        /*new Scenario("S1", countryObjects[0], null),
+        new Scenario("S2", countryObjects[0], countryObjects[0].regions()[0]),
+        new Scenario("S3", countryObjects[0], countryObjects[0].regions()[1]),
+        new Scenario("S4", countryObjects[0], countryObjects[0].regions()[2]),
+        new Scenario("S5", countryObjects[1], null),*/
+    ]);
 
     self.currentScenario = ko.observable("results");
 
@@ -28,6 +34,7 @@ function AppModel() {
 
     self.newScenario = ko.observable(new NewScenario(countryObjects, self));
     self.newCountryForm = ko.observable(new NewCountryForm(self));
+    self.updateScenariosForm = ko.observable(new UpdateScenariosForm(self));
 
     self.initSliders = function () {
 

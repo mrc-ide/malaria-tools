@@ -1,0 +1,49 @@
+<div id="update-scenarios" class="modal fade" role="dialog" data-bind="with: updateScenariosForm">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h3 class="modal-title">Update scenarios</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        The following scenarios also currently use the 
+                        <strong data-bind="text: originalCountryName"></strong> baseline. 
+                        Select the scenarios that you want to update to use the new 
+                        <strong data-bind="text: newCountryName"></strong> baseline.
+                    </p>
+                    <p>
+                        Any scenarios you uncheck will continue to use the original 
+                        <strong data-bind="text: originalCountryName"></strong> baseline data.
+                    </p>
+                    <ul data-bind="foreach: scenarios" class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-1">
+                                    <input type="checkbox" data-bind="checked: selected" />
+                                </div>
+                                <div class="col-11" data-bind="click: toggle">
+                                    <label data-bind="text: name" />
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <button type="submit"
+                                class="btn btn-primary rounded-0"
+                                data-dismiss="modal"
+                                data-bind="click: updateScenarios">
+                            Update selected
+                        </button>
+                        <button class="btn btn-secondary rounded-0" data-dismiss="modal">Just update scenario 1</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
