@@ -18,11 +18,15 @@ function BaselineRenderer() {
                         }]
                 },
                 options: {
+                    title: {
+                        text: "Seasonal characteristics",
+                        display: true
+                    },
                     scales: {
                         yAxes: [{
                             scaleLabel: {
                                 display: true,
-                                labelString: "Prevalence"
+                                labelString: "??"
                             }
                         }]
                     }
@@ -56,16 +60,51 @@ function BaselineRenderer() {
                 options: {
                     title: {
                         text: "Vectors",
-                        display: true,
-                        position: "left"
+                        display: true
                     }
                 }
             });
         })
     };
 
+    var drawPastITN = function() {
+        $.each($('.past-itn'), function () {
+            new Chart($(this), {
+                type: 'line',
+                data: {
+                    labels: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013],
+                    datasets: [{
+                        borderColor: "#3e95cd",
+                        data: [2, 3, 3, 3, 7, 16, 21, 20, 17, 13, 15, 26]
+                    }]
+                },
+                options: {
+                    title: {
+                        text: "Past ITN usage",
+                        display: true
+                    },
+                    scales: {
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: "?? (probably %)"
+                            }
+                        }],
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: "Year"
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+    };
+
     self.render = function(region) {
         drawLine();
         drawPie(region);
+        drawPastITN();
     };
 }
