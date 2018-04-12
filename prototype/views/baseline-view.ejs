@@ -2,8 +2,13 @@
     <a href="#" class="mb-5" data-bind="click: function() {regionMode('edit')}">Edit</a>
 </p>
 <p data-bind="if: !currentCountry().editable">
-    <a href="#" class="mb-5" data-toggle="modal"
-       data-target="#new-country" data-bind="text: mode() == 'scenario' ? 'Edit' : 'Create editable copy'"></a>
+    <a href="#" 
+       class="mb-5" 
+       data-toggle="modal"
+       data-target="#new-country" 
+       data-bind="text: mode() == 'scenario' ? 'Edit' : 'Create editable copy',
+                  click: newCountryForm().setup(currentCountry())">
+    </a>
 </p>
 <div class="text-secondary" data-bind="with: currentRegion">
     <div class="d-inline mr-3 text-secondary">
