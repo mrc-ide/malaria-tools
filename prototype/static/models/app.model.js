@@ -24,22 +24,10 @@ function AppModel() {
     self.currentCountry = ko.observable(self.countries()[0]);
     self.currentRegion = ko.observable(self.currentCountry().regions()[0]);
     self.selectedCountry = ko.observable(self.countries()[0]);
-    self.newCountry = ko.computed(function () {
-        return new Country(self.selectedCountry().name + "-1", regionObjects, true)
-    });
 
-    self.addCountry = function () {
-        self.countries.push(self.newCountry());
-        self.countries.sort(function (left, right) {
-            return left.name < right.name ? -1 : 1
-        });
-
-        self.currentCountry(self.newCountry());
-        self.currentRegion(self.newCountry().regions()[0]);
-        self.mode('country');
-        self.regionMode('edit');
-    };
+    self.regionMode('edit');
     self.newScenario = ko.observable(new NewScenario(countryObjects, self));
+    self.newCountryForm = ko.observable(new NewCountryForm(self));
 
     self.changeCountry = function (data) {
         self.currentCountry(data);

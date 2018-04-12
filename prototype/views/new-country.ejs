@@ -1,11 +1,11 @@
-<div id="new-country" class="modal fade" role="dialog">
+<div id="new-country" class="modal fade" role="dialog" data-bind="with: newCountryForm">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="mt-5 mb-5">
                     <h5>Enter a name for this new baseline data set</h5>
                     <input type="text" class="form-control rounded-0"
-                           data-bind="value: newCountry().name"/>
+                           data-bind="textInput: name"/>
                 </div>
             </div>
             <div class="modal-footer">
@@ -28,10 +28,10 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-6 border-right">
+                    <div class="col-6 border-right" data-bind="with: newCountryForm">
                         <div class="m-3">
                             <h5>Enter a name for this new baseline data seft</h5>
-                            <input type="text" class="form-control rounded-0" data-bind="value: newCountry().name"/>
+                            <input type="text" class="form-control rounded-0" data-bind="textInput: name"/>
                         </div>
                         <div class="modal-footer">
                             <div>
