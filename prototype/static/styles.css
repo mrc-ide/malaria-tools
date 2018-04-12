@@ -55,6 +55,9 @@ html, body {
 .scenario-bar {
     background-color: #e3f2fd;
 }
+.scenario-bar.sidebar.in {
+    width: 230px;
+}
 
 .sidebar.in {
     width: 180px;
@@ -98,7 +101,7 @@ label.checkbox-label {
 }
 
 input[type='number'] {
-    width: 50px;
+    width: 80px;
 }
 
 input[type='number'].form-control {

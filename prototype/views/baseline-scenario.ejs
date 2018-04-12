@@ -1,6 +1,11 @@
 <div data-bind="if: mode() == 'scenario'">
-    <h5>Baseline data for <span data-bind="text: showScenarioSection() && currentScenario().region()
-    && currentScenario().region().name + ','"></span>
-        <span data-bind="text: showScenarioSection() && currentScenario().country().name"></span></h5>
-    
+	<div data-bind="if: showScenarioSection">
+		<div data-bind="with: currentScenario">
+		    <h5>
+		    	Baseline data for 
+		        <span data-bind="text: country().name"></span>
+		    	(<span data-bind="text: region().name"></span>)
+		    </h5>
+	    </div>
+    </div>
 </div>
