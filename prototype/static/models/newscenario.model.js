@@ -48,5 +48,5 @@ function NewScenario(countries, parent) {
         self.selectedCountry(null);
         self.selectedRegion(null);
         $("#new-scenario").find(".collapse").collapse("hide");
-    }
+    };
 }

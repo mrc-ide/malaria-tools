@@ -1,14 +1,23 @@
-<p data-bind="if: currentCountry().editable">
-    <a href="#" class="mb-5" data-bind="click: function() {regionMode('edit')}">Edit</a>
-</p>
-<p data-bind="if: !currentCountry().editable">
-    <a href="#" 
-       class="mb-5" 
-       data-toggle="modal"
-       data-target="#new-country" 
-       data-bind="text: mode() == 'scenario' ? 'Edit' : 'Create editable copy',
-                  click: setupNewCountryForm">
-    </a>
+<p class="mb-5">
+  <span data-bind="if: currentCountry().editable">
+      <a href="#" class="mb-5" data-bind="click: function() {regionMode('edit')}">Edit</a>
+  </span>
+  <span data-bind="if: !currentCountry().editable">
+      <a href="#" 
+         data-toggle="modal"
+         data-target="#new-country" 
+         data-bind="text: mode() == 'scenario' ? 'Edit' : 'Create editable copy',
+                    click: setupNewCountryForm">
+      </a>
+  </span>
+  <span data-bind="if: mode() == 'scenario'">
+      <a href="#"
+         data-toggle="modal"
+         data-target="#choose-different-baseline"
+         data-bind="click: newScenario().clear()">
+          Change to a different baseline   
+      </a>
+  </span>
 </p>
 <div class="text-secondary" data-bind="with: currentRegion">
     <div class="d-inline mr-3 text-secondary">

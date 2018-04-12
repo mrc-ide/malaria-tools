@@ -136,5 +136,11 @@ function AppModel() {
             country = scenario.country();
         }
         self.newCountryForm().setup(country, scenario);
-    }
+    };
+
+    self.changeBaseline = function() {
+        var scenario = self.currentScenario()
+        scenario.country(self.newScenario().selectedCountry());
+        scenario.region(self.newScenario().selectedRegion());
+    };
 }
