@@ -60,19 +60,31 @@ function AppModel() {
         });
     }
 
+    self.drawBaselineGraphs = function () {
+        self.drawPie();
+        self.drawLine();
+        self.drawITN()
+    };
+
     self.changeCountry = function (data) {
         self.currentCountry(data);
+        $('.nav-item').on('mouseover', function () {
+            $(this).addClass('focus');
+        });
+
+        $('.nav-item').on('mouseout', function () {
+            $(this).removeClass('focus');
+        });
         self.currentRegion(data.regions()[0]);
         self.regionMode('view');
-        self.drawLine();
-        self.drawPie();
+        self.drawBaselineGraphs();
     };
 
     self.changeRegion = function (data) {
         self.currentRegion(data);
         self.regionMode('view');
         self.drawLine();
-        self.drawPie();
+        self.drawBaselineGraphs();
         self.initSliders();
     };
 
@@ -118,13 +130,10 @@ function AppModel() {
                         }]
                 },
                 options: {
-                    scales: {
-                        yAxes: [{
-                            scaleLabel: {
-                                display: true,
-                                labelString: "Prevalence"
-                            }
-                        }]
+                    title: {
+                        text: "Seasonal characteristics",
+                        display: true,
+                        position: "top"
                     }
                 }
             });
@@ -135,7 +144,7 @@ function AppModel() {
 
     self.drawPie = function () {
         var vectors = self.currentRegion().vectors();
-        if (self.pieChart){
+        if (self.pieChart) {
             self.pieChart.destroy();
         }
         $.each($('.vectors'), function () {
@@ -158,6 +167,41 @@ function AppModel() {
                         text: "Vectors",
                         display: true,
                         position: "left"
+                    }
+                }
+            });
+        })
+    };
+
+    self.drawITN = function () {
+
+        var fakeDataPoints = self.years().map(x => 30 + Math.floor(Math.random() * Math.floor(70)));
+
+        $.each($('.itn'), function () {
+
+            new Chart($(this), {
+                type: 'horizontalBar',
+                data: {
+                    labels: self.years(),
+                    datasets: [{
+                        data: fakeDataPoints,
+                        label: 'coverage',
+                        backgroundColor: "#ffce56",
+                    }]
+                },
+                options: {
+                    title: {
+                        text: "Historical ITN use",
+                        display: true,
+                        position: "top"
+                    },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                min: 0,
+                                max: 100
+                            }
+                        }]
                     }
                 }
             });

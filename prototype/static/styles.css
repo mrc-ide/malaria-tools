@@ -64,12 +64,16 @@ html, body {
 }
 
 a.active {
-    background: #007bff;
+    background: #0055C0;
     color: white !important;
 }
 
 .nav-item.focus {
-    background: #b5c1ca;
+    background: #5cabff;
+}
+
+.nav-item.focus a {
+    color: white !important;
 }
 
 input[type='checkbox'] {
