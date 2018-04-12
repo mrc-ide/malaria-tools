@@ -38,9 +38,7 @@
     </div>
     <ul class="nav flex-column" id="scenarios" data-bind="foreach: scenarios">
         <li class="nav-item">
-            <div class="mt-3 ml-3 float-left" style="height: 40px;">
-                <input type="checkbox" data-bind="checked: selected"/>
-            </div>
+            <!--<input type="checkbox" data-bind="checked: selected" class="float-left"/>-->
             <a class="nav-link" href="#"
                data-bind="css: { active: $root.currentScenario() == $data },
                click: function() {

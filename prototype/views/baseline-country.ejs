@@ -1,6 +1,6 @@
 <div data-bind="if: mode() == 'country'">
     <h5>
-    	Baseline data for 
+        <span data-bind="text: regionMode() == 'edit' ? 'Editing' : 'Viewing' "></span> baseline data for
         <span data-bind="text: currentCountry().name"></span>
         (<span data-bind="text: currentRegion().name"></span>)
     </h5>
