@@ -16,7 +16,6 @@ function AppModel() {
     self.mode = ko.observable('scenario');
     self.scenarioMode = ko.observable('intervention');
     self.regionMode = ko.observable('view');
-    self.results = new Results();
 
     self.countries = ko.observableArray(countryObjects);
     self.scenarios = ko.observableArray([]);
@@ -87,6 +86,12 @@ function AppModel() {
             return false;
         }
     }, self);
+
+    self.selectedScenarios = ko.computed(function() {
+        return self.scenarios().filter(function(s) {
+            return s.selected();
+        });
+    });
 
     self.drawLine = function () {
         $.each($('.seasonal'), function () {
@@ -171,7 +176,6 @@ function AppModel() {
     }, self);
 
     self.showResults = function () {
-        self.results.render();
         return self.currentScenario("results");
     };
 
@@ -189,7 +193,8 @@ function AppModel() {
         var scenario = self.currentScenario();
         scenario.country(self.newScenario().selectedCountry());
         scenario.region(self.newScenario().selectedRegion());
-    };
+    }
 
+    self.results = new Results(self);
     self.initSliders();
 }
