@@ -33,7 +33,7 @@ function NewCountryForm(app) {
                 return s != scenario && s.country() == self.originalCountry();
             });
             if (relatedScenarios.length > 0) {
-                self.app.updateScenariosForm().setup(relatedScenarios, self.originalCountry(), country);
+                self.app.updateScenariosForm().setup(scenario, relatedScenarios, self.originalCountry(), country);
                 return;
             }
         }

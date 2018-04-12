@@ -1,11 +1,13 @@
 function UpdateScenariosForm(app) {
 	var self = this;
 	self.app = ko.observable(app);
+	self.intendedScenario = ko.observable();
 	self.scenarios = ko.observableArray();
 	self.originalCountry = ko.observable();
 	self.newCountry = ko.observable();
 
-	self.setup = function(scenarios, originalCountry, newCountry) {
+	self.setup = function(intendedScenario, scenarios, originalCountry, newCountry) {
+		self.intendedScenario(intendedScenario);
 		self.scenarios(scenarios.map(function(s) {
 			return new SelectableScenario(s);
 		}));

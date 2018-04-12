@@ -40,7 +40,9 @@
                                 data-bind="click: updateScenarios">
                             Update selected
                         </button>
-                        <button class="btn btn-secondary rounded-0" data-dismiss="modal">Just update scenario 1</button>
+                        <button class="btn btn-secondary rounded-0" data-dismiss="modal">
+                            Just update <span data-bind="text: intendedScenario().name" />
+                        </button>
                     </div>
                 </div>
             </form>
