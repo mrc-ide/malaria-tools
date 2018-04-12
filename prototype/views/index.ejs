@@ -135,10 +135,10 @@
                 <div class="col-12 p-5">
                     <%- include('baseline-country') %>
                     <%- include('baseline-scenario') %>
-                    <div data-bind="if: regionMode() == 'view'">
+                    <div data-bind="visible: regionMode() == 'view'">
                         <%- include('baseline-view') %>
                     </div>
-                    <div data-bind="if: regionMode() == 'edit'">
+                    <div data-bind="visible: regionMode() == 'edit'">
                         <%- include('baseline-edit') %>
                     </div>
                 </div>

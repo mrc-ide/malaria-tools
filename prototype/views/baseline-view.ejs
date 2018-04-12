@@ -10,12 +10,12 @@
                   click: newCountryForm().setup(currentCountry())">
     </a>
 </p>
-<div class="text-secondary">
+<div class="text-secondary" data-bind="with: currentRegion">
     <div class="d-inline mr-3 text-secondary">
-        <strong>Year</strong>: 2013
+        <strong>Year</strong>: <span data-bind="text: year"></span>
     </div>
     <div class="d-inline mr-3">
-        <strong>Age range</strong>: 0 - 5
+        <strong>Age range</strong>: <span data-bind="text: ageStart"></span> - <span data-bind="text: ageEnd"></span>
     </div>
     <div class="d-inline mr-3">
         <strong>Model estimated baseline under 5 prevalence</strong>:42.6
