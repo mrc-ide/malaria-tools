@@ -25,6 +25,7 @@ function NewCountryForm(app) {
             });
             scenario.region(equivalentRegion);
         }
+        self.app.regionMode('edit');
     };
 
     self.setup = function(country, scenario) {

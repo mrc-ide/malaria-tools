@@ -11,6 +11,8 @@ function AppModel() {
         return new Country(x, regionObjects);
     });
 
+    self.years = ko.observableArray([2011, 2012, 2013, 2014, 2015, 2016, 2017]);
+
     self.mode = ko.observable('scenario');
     self.scenarioMode = ko.observable('intervention');
     self.regionMode = ko.observable('view');
@@ -25,7 +27,6 @@ function AppModel() {
     self.currentRegion = ko.observable(self.currentCountry().regions()[0]);
     self.selectedCountry = ko.observable(self.countries()[0]);
 
-    self.regionMode('edit');
     self.newScenario = ko.observable(new NewScenario(countryObjects, self));
     self.newCountryForm = ko.observable(new NewCountryForm(self));
 
@@ -74,8 +75,6 @@ function AppModel() {
             });
         })
     };
-
-    self.years = ko.observableArray([2013, 2014, 2015, 2016]);
 
     self.drawPie = function () {
 

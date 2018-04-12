@@ -110,3 +110,11 @@ input[type='number'].form-control {
 .custom-tabs .tab-pane.active.show {
     display: block;
 }
+
+.contents, .tab-content, .tab-pane, .full-screen {
+    height: 100%;
+}
+
+.full-screen {
+    overflow-y: auto;
+}
