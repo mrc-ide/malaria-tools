@@ -10,7 +10,8 @@ function initSliders() {
             var selector = $(this).data("control");
             $(selector)
                 .val(ui.value);
-        }
+        },
+        range: "min"
     });
 
     $("[data-role=slider-value]").change(function (e) {
