@@ -208,7 +208,6 @@ function AppModel() {
     self.changeBaseline = function () {
         $("#choose-different-baseline").find(".collapse").collapse("hide");
         var scenario = self.currentScenario();
-        console.log(self.newScenario().selectedCountry());
         scenario.country(self.newScenario().selectedCountry());
         scenario.region(self.newScenario().selectedRegion());
         self.currentRegion(scenario.region());
