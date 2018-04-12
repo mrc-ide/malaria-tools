@@ -38,6 +38,14 @@ function UpdateScenariosForm(app) {
 			return null;
 		}
 	}, self);
+
+	self.intendedScenarioName = ko.computed(function() {
+		if (this.intendedScenario()) {
+			return this.intendedScenario().name();
+		} else {
+			return null;
+		}
+	}, self);
 };
 
 function SelectableScenario(scenario) {
