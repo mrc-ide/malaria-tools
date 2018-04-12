@@ -171,11 +171,15 @@ function AppModel() {
     }, self);
 
     self.showResultsSidebar = ko.computed(function() {
-        return self.showResultsSection()
+        return self.showResultsSection() && !self.loading()
             && self.hasResults();
     }, self);
 
     self.showResults = function () {
+        self.loading(true);
+        setTimeout(function(){
+            self.loading(false);
+        }, 5000);
         return self.currentScenario("results");
     };
 
