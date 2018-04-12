@@ -1,9 +1,20 @@
 <div id="new-country" class="modal fade" role="dialog" data-bind="with: newCountryForm">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create a new baseline</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-body">
-                <div class="mt-5 mb-5">
-                    <h5>Enter a name for this new baseline data set</h5>
+                <div>
+                    The <span data-bind="text: originalName"></span>
+                    baseline is built-in and can't be changed. Instead, you can
+                    create a copy of this data and then edit that copy.
+                </div>
+                <div class="mt-3 mb-2">
+                    <div class="mb-1">Enter a name for the new baseline data set</div>
                     <input type="text" class="form-control rounded-0"
                            data-bind="textInput: name"/>
                 </div>

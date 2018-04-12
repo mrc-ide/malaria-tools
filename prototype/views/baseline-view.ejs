@@ -1,8 +1,8 @@
-<p class="mb-5">
-  <span data-bind="if: currentCountry().editable">
+<p>
+  <span data-bind="if: canEditCountry">
       <a href="#" class="mb-5" data-bind="click: function() {regionMode('edit')}">Edit</a>
   </span>
-  <span data-bind="if: !currentCountry().editable">
+  <span data-bind="ifnot: canEditCountry">
       <a href="#" 
          data-toggle="modal"
          data-target="#new-country" 

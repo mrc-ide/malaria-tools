@@ -45,6 +45,23 @@ function AppModel() {
         self.drawPie();
     };
 
+    self.baselineCountry = ko.computed(function() {
+        if (self.mode() == "country") {
+            return self.currentCountry();
+        } else if (self.currentScenario() != "results") {
+            return self.currentScenario().country();
+        } else {
+            return null;
+        }
+    }, self);
+    self.canEditCountry = ko.computed(function() {
+        if (self.baselineCountry()) {
+            return self.baselineCountry().editable;
+        } else {
+            return false;
+        }
+    }, self);
+
     self.drawLine = function () {
         $.each($('.seasonal'), function () {
             new Chart($(this), {

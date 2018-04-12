@@ -2,6 +2,7 @@ function NewCountryForm(app) {
     var self = this;
 
     self.app = app;
+    self.originalName = ko.observable();
     self.name = ko.observable();
     self.regions = ko.observableArray();
     self.forScenario = ko.observable();
@@ -29,6 +30,7 @@ function NewCountryForm(app) {
     };
 
     self.setup = function(country, scenario) {
+        self.originalName(country.name);
         self.name(country.name + "-1");
         self.regions(country.regions().map(function(r) { return r.copy() }));
         if (scenario) {
