@@ -21,9 +21,12 @@ function NewCountryForm(app) {
         var scenario = self.forScenario();
         if (scenario) {
             scenario.country(country);
-            var equivalentRegion = country.regions().find(function(r) { 
-                r.name == scenario.region().name 
-            });
+            var equivalentRegion = null;
+            if (scenario.region()) {
+                equivalentRegion = country.regions().find(function(r) { 
+                    r.name == scenario.region().name 
+                });
+            }
             scenario.region(equivalentRegion);
         }
         self.app.regionMode('edit');
