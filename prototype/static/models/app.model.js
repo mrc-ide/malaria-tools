@@ -83,7 +83,11 @@ function AppModel() {
 
     self.changeRegion = function (data) {
         self.currentRegion(data);
-        self.regionMode('view');
+
+        if (!self.currentCountry().editable) {
+            self.regionMode('view');
+        }
+        
         self.renderBaseline();
         self.initSliders();
     };
