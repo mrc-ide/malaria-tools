@@ -37,8 +37,7 @@
                data-bind="css: { active: $root.currentScenario() == $data },
                click: function() {
                $root.currentScenario($data);
-               $root.selectedCountry($data.country);
-               $root.regionMode('view');
+               $root.changeCountry($data.country);
                }">
                 <div data-bind="text: name"></div>
                 <small>
@@ -94,7 +93,7 @@
                                     href="#"
                                     data-bind="text: $data.name,
                                      css: { active: $root.currentRegion() == $data },
-                                     click: function () {$root.currentRegion($data); $root.regionMode('view')}"
+                                     click: function () {$root.changeRegion($data);}"
                 ></a></li>
         </ul>
     </div>

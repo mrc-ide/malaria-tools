@@ -14,7 +14,7 @@ function Results() {
     self.selectGraph = function(graph) {
         self.currentGraph(graph);
         self.render();
-    }
+    };
 
     var renderChart = function(target, yLabel, xLabel) {
         return new Chart($(target), {

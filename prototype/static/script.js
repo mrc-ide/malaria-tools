@@ -1,4 +1,6 @@
 function initSliders() {
+    console.log($(".slider"));
+
     $(".slider").slider({
         create: function (event, ui) {
             $(this).slider('value', $(this).data('initial'));
