@@ -97,7 +97,7 @@ label.checkbox-label {
 }
 
 input[type='number'] {
-    width: 50px;
+    width: 80px;
 }
 
 input[type='number'].form-control {
