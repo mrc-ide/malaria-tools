@@ -46,7 +46,9 @@
                         <span data-bind="text: name"></span>
                     </span>
                     <span data-bind="if: region"> – </span>
-                    <span data-bind="text: region"></span>
+                    <span data-bind="with: region">
+                        <span data-bind="text: name"></span>
+                    </span>
                 </small>
             </a>
         </li>

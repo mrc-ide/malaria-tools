@@ -1,17 +1,17 @@
 <div class="country-chooser mb-3">
     <ul data-bind="foreach: countries" class="list-group">
         <li>
-                                <span class="list-group-item"
-                                      data-bind="text: name,
-                                                 css: { active: $parents[0].isActive($data) },
-                                                 click: $parent.selectCountry">
-                                </span>
+            <span class="list-group-item"
+                  data-bind="text: name,
+                             css: { active: $parents[0].isActive($data) },
+                             click: $parent.selectCountry">
+            </span>
             <div class="collapse">
                 <ul class="list-group" data-bind="foreach: regions">
                     <li class="list-group-item"
                         data-bind="text: $data.name,
-                                                       click: $parents[1].selectRegion,
-                                                       css: { active: $parents[1].isActive($data) }">
+                                   click: $parents[1].selectRegion,
+                                   css: { active: $parents[1].isActive($data) }">
                     </li>
                 </ul>
             </div>
