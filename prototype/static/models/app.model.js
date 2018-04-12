@@ -32,7 +32,7 @@ function AppModel() {
 
     self.changeCountry = function (data) {
         self.currentCountry(data);
-        self.currentRegion(data.regions()[0]);
+        self.currentRegion(data().regions()[0]);
         self.regionMode('view');
         self.drawLine();
         self.drawPie();
@@ -138,7 +138,7 @@ function AppModel() {
     };
 
     self.changeBaseline = function() {
-        var scenario = self.currentScenario()
+        var scenario = self.currentScenario();
         scenario.country(self.newScenario().selectedCountry());
         scenario.region(self.newScenario().selectedRegion());
     };

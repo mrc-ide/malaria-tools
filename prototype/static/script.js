@@ -1,5 +1,4 @@
 function initSliders() {
-    console.log($(".slider"));
 
     $(".slider").slider({
         create: function (event, ui) {

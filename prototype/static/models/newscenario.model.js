@@ -41,6 +41,7 @@ function NewScenario(countries, parent) {
         } else {
             console.log("Discarded attempt to create invalid scenario");
         }
+
     };
 
     self.clear = function() {
