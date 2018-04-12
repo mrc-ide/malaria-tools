@@ -6,11 +6,12 @@
       <a href="#" 
          data-toggle="modal"
          data-target="#new-country" 
-         data-bind="text: mode() == 'scenario' ? 'Edit' : 'Create editable copy',
+         data-bind="text: mode() == 'scenario' ? 'Edit this baseline' : 'Create an editable copy of this baseline',
                     click: setupNewCountryForm">
       </a>
   </span>
   <span data-bind="if: mode() == 'scenario'">
+      <span style="margin: 0 10px;">|</span>
       <a href="#"
          data-toggle="modal"
          data-target="#choose-different-baseline"
