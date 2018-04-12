@@ -126,4 +126,14 @@ function AppModel() {
         self.results.render();
         return self.currentScenario("results");
     };
+
+    self.setupNewCountryForm = function() {
+        var scenario = null;
+        var country = self.currentCountry();
+        if (self.mode() == "scenario") {
+            scenario = self.currentScenario();
+            country = scenario.country();
+        }
+        self.newCountryForm().setup(country, scenario);
+    }
 }

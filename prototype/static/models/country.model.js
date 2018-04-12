@@ -18,4 +18,14 @@ function Region(name, year, ageStart, ageEnd, vectors) {
 
         return total === 100;
     });
+
+    this.copy = function() {
+        return new Region(
+            self.name, 
+            self.year(), 
+            self.ageStart(), 
+            self.ageEnd(), 
+            self.vectors()
+        );
+    }
 }
