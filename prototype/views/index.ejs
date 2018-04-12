@@ -43,7 +43,7 @@
                data-bind="css: { active: $root.currentScenario() == $data },
                click: function() {
                $root.currentScenario($data);
-               $root.changeCountry($data.country);
+               $root.changeCountry($data.country());
                }">
                 <div>
                     <span data-bind="text: name"></span>
