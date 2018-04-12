@@ -9,7 +9,7 @@ function NewScenario(countries, parent) {
     
     self.selectCountry = function(country, event) {
         self.selectedCountry(country);
-        self.selectedRegion(null);
+        self.selectedRegion(country.regions()[0]);
         var item = $(event.target).closest("li");
         item.closest("ul").find(".collapse").collapse("hide");
         item.find(".collapse").collapse("show");

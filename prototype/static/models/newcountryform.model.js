@@ -8,6 +8,7 @@ function NewCountryForm(app) {
     self.forScenario = ko.observable();
 
     self.addCountry = function () {
+
         var country = new Country(self.name(), self.regions(), true);
         self.app.countries.push(country);
         self.app.countries.sort(function (left, right) {
