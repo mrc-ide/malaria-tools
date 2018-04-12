@@ -15,6 +15,7 @@ function NewCountryForm(app) {
         self.app.currentCountry(country);
         self.app.currentRegion(country.regions()[0]);
         self.app.mode('country');
+        self.app.regionMode('edit');
     };
 
     self.setup = function(country) {
