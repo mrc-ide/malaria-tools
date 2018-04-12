@@ -130,9 +130,11 @@ function AppModel() {
 
     self.setupNewCountryForm = function() {
         var scenario = null;
+        var country = self.currentCountry();
         if (self.mode() == "scenario") {
             scenario = self.currentScenario();
+            country = scenario.country();
         }
-        self.newCountryForm().setup(self.currentCountry(), scenario);
+        self.newCountryForm().setup(country, scenario);
     }
 }
