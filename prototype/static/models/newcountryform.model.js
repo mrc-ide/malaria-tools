@@ -30,6 +30,7 @@ function NewCountryForm(app) {
             scenario.region(equivalentRegion);
         }
         self.app.regionMode('edit');
+        self.app.initSliders();
     };
 
     self.setup = function(country, scenario) {
