@@ -35,6 +35,7 @@ function AppModel() {
     self.newScenario = ko.observable(new NewScenario(countryObjects, self));
     self.newCountryForm = ko.observable(new NewCountryForm(self));
     self.updateScenariosForm = ko.observable(new UpdateScenariosForm(self));
+    self.baselineRenderer = new BaselineRenderer();
 
     self.initSliders = function () {
 
@@ -64,15 +65,13 @@ function AppModel() {
         self.currentCountry(data);
         self.currentRegion(data.regions()[0]);
         self.regionMode('view');
-        self.drawLine();
-        self.drawPie();
+        self.renderBaseline();
     };
 
     self.changeRegion = function (data) {
         self.currentRegion(data);
         self.regionMode('view');
-        self.drawLine();
-        self.drawPie();
+        self.renderBaseline();
         self.initSliders();
     };
 
@@ -100,68 +99,10 @@ function AppModel() {
         });
     });
 
-    self.drawLine = function () {
-        $.each($('.seasonal'), function () {
-            new Chart($(this), {
-                type: 'line',
-                data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                    datasets: [{
-                        label: 'rainfall',
-                        borderColor: "#3e95cd",
-                        data: [12, 19, 15, 13, 10, 3, 2, 2, 4, 7, 11, 14]
-                    },
-                        {
-                            label: 'incidence',
-                            borderColor: "#8e5ea2",
-                            data: [11, 12, 18, 15, 13, 9, 4, 3, 3, 5, 8, 12]
-                        }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            scaleLabel: {
-                                display: true,
-                                labelString: "Prevalence"
-                            }
-                        }]
-                    }
-                }
-            });
-        })
-    };
-
-    self.pieChart = null;
-
-    self.drawPie = function () {
-        var vectors = self.currentRegion().vectors();
-        if (self.pieChart){
-            self.pieChart.destroy();
+    self.renderBaseline = function() {
+        if (self.currentRegion()) {
+            self.baselineRenderer.render(self.currentRegion());
         }
-        $.each($('.vectors'), function () {
-            self.pieChart = new Chart($(this), {
-                type: 'pie',
-                data: {
-                    datasets: [{
-                        data: [vectors.f(), vectors.a(), vectors.g()],
-                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"]
-                    }],
-
-                    labels: [
-                        'Funestus',
-                        'Arabiensis',
-                        'Gambiae'
-                    ]
-                },
-                options: {
-                    title: {
-                        text: "Vectors",
-                        display: true,
-                        position: "left"
-                    }
-                }
-            });
-        })
     };
 
     self.loading = ko.observable(false);
@@ -211,7 +152,7 @@ function AppModel() {
         scenario.country(self.newScenario().selectedCountry());
         scenario.region(self.newScenario().selectedRegion());
         self.currentRegion(scenario.region());
-        self.drawPie();
+        self.renderBaseline();
     };
 
     self.results = new Results(self);

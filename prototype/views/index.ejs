@@ -11,8 +11,13 @@
         </li>
         <li class="list-inline-item" style="margin-left: -13px;">
             <a class="nav-link" href="#"
-               data-bind="css: { active: mode() == 'country'}, click: function() { mode('country');
-                $root.drawPie(); $root.drawLine();}">Countries</a>
+               data-bind="css: { active: mode() == 'country'}, 
+                          click: function() { 
+                              mode('country');
+                              $root.renderBaseline(); 
+                          }">
+                Countries
+            </a>
         </li>
     </ul>
 </div>
@@ -82,11 +87,17 @@
         <li class="nav-item">
             <a id="interventions-tab" class="nav-link" href="#"
                data-bind="css: {active: scenarioMode() == 'intervention'},
-               click: function() { scenarioMode('intervention')}">Interventions</a></li>
+               click: function() { scenarioMode('intervention')}">
+                Interventions
+            </a>
+        </li>
         <li class="nav-item">
             <a id="baseline-tab" class="nav-link" href="#"
                data-bind="css: {active: scenarioMode() == 'baseline'},
-                click: function() { scenarioMode('baseline'); drawPie(); drawLine();}">Baseline</a></li>
+                          click: function() { scenarioMode('baseline'); renderBaseline(); }">
+                Baseline
+            </a>
+        </li>
     </ul>
 </div>
 <div class="region-bar sidebar bg-light" id="regions" data-bind="css: { in: mode() == 'country' && currentCountry()}">
