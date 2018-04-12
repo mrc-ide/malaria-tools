@@ -71,6 +71,10 @@ a.active {
     color: white !important;
 }
 
+.nav-item.focus {
+    background: #b5c1ca;
+}
+
 input[type='checkbox'] {
     width: 30px;
     height: 30px;
