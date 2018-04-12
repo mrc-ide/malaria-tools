@@ -4,7 +4,7 @@ var countries = [
 
 function AppModel() {
     var self = this;
-    var regionObjects = ["Region 1", "Region 2", "Region 3", "Region 4"].map(function(x){
+    var regionObjects = ["Whole country", "Region 1", "Region 2", "Region 3", "Region 4"].map(function (x) {
         return new Region(x, 2013, 0, 5, {f: ko.observable(20), a: ko.observable(80), g: ko.observable(0)})
     });
     var countryObjects = countries.map(function (x) {
@@ -36,7 +36,7 @@ function AppModel() {
     self.newCountryForm = ko.observable(new NewCountryForm(self));
     self.updateScenariosForm = ko.observable(new UpdateScenariosForm(self));
 
-    self.initSliders = function() {
+    self.initSliders = function () {
 
         $(".slider").slider({
             create: function (event, ui) {
@@ -76,7 +76,7 @@ function AppModel() {
         self.initSliders();
     };
 
-    self.baselineCountry = ko.computed(function() {
+    self.baselineCountry = ko.computed(function () {
         if (self.mode() == "country") {
             return self.currentCountry();
         } else if (self.currentScenario() != "results") {
@@ -86,7 +86,7 @@ function AppModel() {
         }
     }, self);
 
-    self.canEditCountry = ko.computed(function() {
+    self.canEditCountry = ko.computed(function () {
         if (self.baselineCountry()) {
             return self.baselineCountry().editable;
         } else {
@@ -94,8 +94,8 @@ function AppModel() {
         }
     }, self);
 
-    self.selectedScenarios = ko.computed(function() {
-        return self.scenarios().filter(function(s) {
+    self.selectedScenarios = ko.computed(function () {
+        return self.scenarios().filter(function (s) {
             return s.selected();
         });
     });
@@ -131,14 +131,19 @@ function AppModel() {
         })
     };
 
-    self.drawPie = function () {
+    self.pieChart = null;
 
+    self.drawPie = function () {
+        var vectors = self.currentRegion().vectors();
+        if (self.pieChart){
+            self.pieChart.destroy();
+        }
         $.each($('.vectors'), function () {
-            new Chart($(this), {
+            self.pieChart = new Chart($(this), {
                 type: 'pie',
                 data: {
                     datasets: [{
-                        data: [20, 0, 80],
+                        data: [vectors.f(), vectors.a(), vectors.g()],
                         backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"]
                     }],
 
@@ -157,7 +162,6 @@ function AppModel() {
                 }
             });
         })
-
     };
 
     self.loading = ko.observable(false);
@@ -173,38 +177,43 @@ function AppModel() {
             && self.currentScenario() == "results";
     });
 
-    self.hasResults = ko.computed(function() {
+    self.hasResults = ko.computed(function () {
         return self.scenarios().length > 0;
     }, self);
 
-    self.showResultsSidebar = ko.computed(function() {
+    self.showResultsSidebar = ko.computed(function () {
         return self.showResultsSection() && !self.loading()
             && self.hasResults();
     }, self);
 
     self.showResults = function () {
         self.loading(true);
-        setTimeout(function(){
+        setTimeout(function () {
             self.loading(false);
         }, 5000);
         return self.currentScenario("results");
     };
 
-    self.setupNewCountryForm = function() {
+    self.setupNewCountryForm = function () {
         var scenario = null;
         var country = self.currentCountry();
         if (self.mode() == "scenario") {
             scenario = self.currentScenario();
             country = scenario.country();
         }
+
         self.newCountryForm().setup(country, scenario);
     };
 
-    self.changeBaseline = function() {
+    self.changeBaseline = function () {
+        $("#choose-different-baseline").find(".collapse").collapse("hide");
         var scenario = self.currentScenario();
+        console.log(self.newScenario().selectedCountry());
         scenario.country(self.newScenario().selectedCountry());
         scenario.region(self.newScenario().selectedRegion());
-    }
+        self.currentRegion(scenario.region());
+        self.drawPie();
+    };
 
     self.results = new Results(self);
     self.initSliders();
