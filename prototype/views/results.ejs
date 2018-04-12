@@ -13,15 +13,19 @@
             </h4>
         </div>
     </div>
+
 </div>
 
-
-<div data-bind="if: hasResults">
-    <div class="row" data-bind="with: results">
+<div data-bind="visible: hasResults">
+    <div class="row" data-bind="visible: !loading(), with: results">
         <div class="col-12 p-5">
             <div class="mt-5" style="width: 700px;">
                 <canvas id="results-graph"></canvas>
             </div>
         </div>
+    </div>
+    <div class="text-center pt-5" data-bind="if: loading">
+        <h5 class="text-muted mb-2 mt-5">Calculating results...</h5>
+        <img src="spinner.gif"/>
     </div>
 </div>
