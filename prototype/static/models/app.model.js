@@ -125,4 +125,12 @@ function AppModel() {
         self.results.render();
         return self.currentScenario("results");
     };
+
+    self.setupNewCountryForm = function() {
+        var scenario = null;
+        if (self.mode() == "scenario") {
+            scenario = self.currentScenario();
+        }
+        self.newCountryForm().setup(self.currentCountry(), scenario);
+    }
 }

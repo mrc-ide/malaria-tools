@@ -7,7 +7,7 @@
        data-toggle="modal"
        data-target="#new-country" 
        data-bind="text: mode() == 'scenario' ? 'Edit' : 'Create editable copy',
-                  click: newCountryForm().setup(currentCountry())">
+                  click: setupNewCountryForm">
     </a>
 </p>
 <div class="text-secondary" data-bind="with: currentRegion">
