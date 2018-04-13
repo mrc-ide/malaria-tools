@@ -17,8 +17,43 @@
 </div>
 
 <div data-bind="visible: hasResults">
-    <div class="row" data-bind="visible: !loading(), with: results">
-        <div class="col-12 p-5">
+    <div class="row" data-bind="with: results">
+        <div class="col-12 offset-lg-3 col-lg-6" data-bind="if: anyNeedRerun">
+            <div class="alert alert-warning mt-3" role="alert">
+                <p>The following scenarios have been changed and their results are out of date:</p>
+                <ul class="list-group">
+                    <!-- ko foreach: needsRerun -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-8" data-bind="text: name"></div>
+                            <div class="col-4">
+                                <button class="rounded-0 btn btn-success" 
+                                        style="width: 100px;"
+                                        data-bind="click: $parent.run">
+                                    Run
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- /ko -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-4 offset-4">
+                                <button class="rounded-0 btn btn-success" 
+                                        style="width: 100px;"
+                                        data-bind="click: runAll">
+                                    Run all
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" data-bind="visible: !loading() && hasResults(), with: results">
+        <div class="col-12 p-5" data-bind="visible: everRendered">
             <div style="width: 100%;">
                 <canvas id="results-graph"></canvas>
             </div>

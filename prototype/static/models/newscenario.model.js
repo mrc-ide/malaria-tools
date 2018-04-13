@@ -38,6 +38,7 @@ function NewScenario(countries, parent) {
             var scenario = new Scenario(self.name(), self.selectedCountry(), self.selectedRegion());
             self.parent.scenarios.push(scenario);
             self.parent.currentScenario(scenario);
+            self.parent.results.needsRerun.push(scenario);
         } else {
             console.log("Discarded attempt to create invalid scenario");
         }

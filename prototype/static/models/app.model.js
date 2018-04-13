@@ -139,16 +139,17 @@ function AppModel() {
         return self.scenarios().length > 0;
     }, self);
 
+    self.results = new Results(self);
+    
     self.showResultsSidebar = ko.computed(function () {
-        return self.showResultsSection() && !self.loading()
+        return self.showResultsSection() 
+            && !self.loading()
+            && self.results.everRendered()
             && self.hasResults();
     }, self);
 
     self.showResults = function () {
-        self.loading(true);
-        setTimeout(function () {
-            self.loading(false);
-        }, 5000);
+        console.log(self.results.needsRerun());
         return self.currentScenario("results");
     };
 
@@ -172,6 +173,5 @@ function AppModel() {
         self.renderBaseline();
     };
 
-    self.results = new Results(self);
     self.initSliders();
 }

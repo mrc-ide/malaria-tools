@@ -11,11 +11,34 @@ function Results(app) {
     ]);
     self.currentGraph = ko.observable(self.graphs()[0]);
     self.app = ko.observable(app);
+    self.needsRerun = ko.observableArray([...app.scenarios()]);
+    self.everRendered = ko.observable(false);
 
     self.selectGraph = function(graph) {
         self.currentGraph(graph);
         self.render();
     };
+
+    self.load = function() {        
+        self.app().loading(true);
+        setTimeout(function () {
+            self.everRendered(true);
+            self.app().loading(false);
+        }, 5000);
+    };
+
+    self.run = function(scenario) {
+        self.load();
+        self.needsRerun.remove(scenario);
+    };
+    self.runAll = function() {
+        self.load();
+        self.needsRerun([]);
+    }
+
+    self.anyNeedRerun = ko.computed(function() {
+        return this.needsRerun().length > 0;
+    }, self);
 
     var randomDataSeries = function(seed, length) {
         var points = [];
