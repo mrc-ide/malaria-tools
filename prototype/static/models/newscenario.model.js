@@ -20,13 +20,8 @@ function NewScenario(countries, parent) {
     };
 
     self.isActive = function(countryOrRegion) {
-        if (self.selectedRegion()) {
-            return self.selectedRegion() == countryOrRegion;
-        } else if (self.selectedCountry()) {
-            return self.selectedCountry() == countryOrRegion;
-        } else {
-            return false;
-        }
+        return self.selectedCountry() == countryOrRegion
+            || self.selectedRegion() == countryOrRegion;
     };
 
     self.isValid = ko.computed(function() {
