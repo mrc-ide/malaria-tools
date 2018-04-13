@@ -4,6 +4,8 @@
   "description": "protoype for the new Malaria Tools app",
   "main": "app.js",
   "scripts": {
+    "start": "gulp ejs",
+    "watch": "gulp watch-ejs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
