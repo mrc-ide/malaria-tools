@@ -33,6 +33,8 @@ function NewScenario(countries, parent) {
             var scenario = new Scenario(self.name(), self.selectedCountry(), self.selectedRegion());
             self.parent.scenarios.push(scenario);
             self.parent.currentScenario(scenario);
+            // We don't actually track when scenarios change, so our "needs rerun" list if pretty fake:
+            // all we do is add scenarios when they're created.
             self.parent.results.needsRerun.push(scenario);
         } else {
             console.log("Discarded attempt to create invalid scenario");
