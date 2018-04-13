@@ -11,11 +11,34 @@ function Results(app) {
     ]);
     self.currentGraph = ko.observable(self.graphs()[0]);
     self.app = ko.observable(app);
+    self.needsRerun = ko.observableArray([...app.scenarios()]);
+    self.everRendered = ko.observable(false);
 
     self.selectGraph = function(graph) {
         self.currentGraph(graph);
         self.render();
     };
+
+    self.load = function() {        
+        self.app().loading(true);
+        setTimeout(function () {
+            self.everRendered(true);
+            self.app().loading(false);
+        }, 5000);
+    };
+
+    self.run = function(scenario) {
+        self.render();
+        self.needsRerun.remove(scenario);
+    };
+    self.runAll = function() {
+        self.render();
+        self.needsRerun([]);
+    }
+
+    self.anyNeedRerun = ko.computed(function() {
+        return this.needsRerun().length > 0;
+    }, self);
 
     var randomDataSeries = function(seed, length) {
         var points = [];
@@ -29,6 +52,7 @@ function Results(app) {
         return points;
     }
 
+    var charts = [];
     var renderChart = function(target, scenarios, yLabel, xLabel) {
         var colors = [
             "#4D4D4D",
@@ -50,7 +74,7 @@ function Results(app) {
             };
         });
 
-        return new Chart($(target), {
+        var chart = new Chart($(target), {
             type: 'line',
             data: {
                 labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -76,22 +100,26 @@ function Results(app) {
                 }
             }
         });
+        charts.push(chart);
+        return chart;
     }
 
 
-    self.render = ko.computed(function() {
+    self.render = function() {
         if (this.app().showResultsSection()) {
+            self.load();
             var metadata = this.currentGraph();
             var selectedScenarios = this.app().selectedScenarios();
-            //console.log("Rendering " + metadata.name() + " for " + selectedScenarios.length + " scenarios");
+            //console.log("Rendering " + metadata.name() + " for " + selectedScenarios.length + " scenarios");            
+            charts.forEach(function(chart) { 
+                chart.destroy(); 
+            });
+            charts = [];
             $.each($("#results-graph"), function() { 
                 renderChart(this, selectedScenarios, metadata.name(), "? Unknown ?"); 
             });
-            return true;
-        } else {
-            return false;
         }
-    }, self);
+    };
 }
 
 function ResultsGraph(id, name) {
