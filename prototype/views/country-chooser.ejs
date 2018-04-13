@@ -1,3 +1,14 @@
+<style>
+    .country-chooser {
+        height: 450px;
+        overflow-y: scroll;
+    }
+
+    .country-chooser .list-group .list-group .list-group-item {
+        padding-left: 50px;
+    }
+</style> 
+
 <div class="country-chooser mb-3">
     <ul data-bind="foreach: $root.countries" class="list-group">
         <li>
@@ -7,8 +18,8 @@
                              click: $parent.selectCountry">
             </span>
             <div class="collapse">
-                <ul class="list-group" data-bind="foreach: regions">
-                    <li class="list-group-item"
+                <ul class="list-group mt-1 mb-1 mr-3 ml-3" data-bind="foreach: regions">
+                    <li class="list-group-item list-group-item-secondary"
                         data-bind="text: $data.name,
                                    click: $parents[1].selectRegion,
                                    css: { active: $parents[1].isActive($data) }">
