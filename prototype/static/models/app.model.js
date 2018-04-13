@@ -98,6 +98,7 @@ function AppModel() {
         } else if (self.currentScenario() != "results") {
             return self.currentScenario().country();
         } else {
+            // test
             return null;
         }
     }, self);
