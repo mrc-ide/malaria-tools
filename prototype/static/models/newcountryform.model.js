@@ -26,6 +26,9 @@ function NewCountryForm(app) {
         self.app.currentRegion(country.regions()[0]);
         self.app.mode('country');
 
+        self.app.regionMode('edit');
+        self.app.initSliders();
+
         var scenario = self.forScenario();
         if (scenario) {
             scenario.changeCountry(country);
@@ -37,8 +40,6 @@ function NewCountryForm(app) {
                 return;
             }
         }
-        self.app.regionMode('edit');
-        self.app.initSliders();
     };
 
     self.setup = function(country, scenario) {

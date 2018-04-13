@@ -67,44 +67,44 @@ function BaselineRenderer() {
         })
     };
 
-    var drawPastITN = function() {
-        $.each($('.past-itn'), function () {
+    var drawPastITN = function(years) {
+
+        var fakeDataPoints = years.map(x => 30 + Math.floor(Math.random() * Math.floor(70)));
+
+        $.each($('.itn'), function () {
+
             new Chart($(this), {
-                type: 'line',
+                type: 'horizontalBar',
                 data: {
-                    labels: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013],
+                    labels: years,
                     datasets: [{
-                        borderColor: "#3e95cd",
-                        data: [2, 3, 3, 3, 7, 16, 21, 20, 17, 13, 15, 26]
+                        data: fakeDataPoints,
+                        label: 'coverage',
+                        backgroundColor: "#ffce56",
                     }]
                 },
                 options: {
                     title: {
-                        text: "Past ITN usage",
-                        display: true
+                        text: "Historical ITN use",
+                        display: true,
+                        position: "top"
                     },
                     scales: {
-                        yAxes: [{
-                            scaleLabel: {
-                                display: true,
-                                labelString: "?? (probably %)"
-                            }
-                        }],
                         xAxes: [{
-                            scaleLabel: {
-                                display: true,
-                                labelString: "Year"
+                            ticks: {
+                                min: 0,
+                                max: 100
                             }
                         }]
                     }
                 }
             });
-        });
+        })
     };
 
-    self.render = function(region) {
+    self.render = function(region, years) {
         drawLine();
         drawPie(region);
-        drawPastITN();
+        drawPastITN(years);
     };
 }

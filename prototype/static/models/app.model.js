@@ -61,8 +61,21 @@ function AppModel() {
         });
     }
 
+    self.drawBaselineGraphs = function () {
+        self.drawPie();
+        self.drawLine();
+        self.drawITN()
+    };
+
     self.changeCountry = function (data) {
         self.currentCountry(data);
+        $('.nav-item').on('mouseover', function () {
+            $(this).addClass('focus');
+        });
+
+        $('.nav-item').on('mouseout', function () {
+            $(this).removeClass('focus');
+        });
         self.currentRegion(data.regions()[0]);
         self.regionMode('view');
         self.renderBaseline();
@@ -70,7 +83,11 @@ function AppModel() {
 
     self.changeRegion = function (data) {
         self.currentRegion(data);
-        self.regionMode('view');
+
+        if (!self.currentCountry().editable) {
+            self.regionMode('view');
+        }
+        
         self.renderBaseline();
         self.initSliders();
     };
@@ -101,7 +118,7 @@ function AppModel() {
 
     self.renderBaseline = function() {
         if (self.currentRegion()) {
-            self.baselineRenderer.render(self.currentRegion());
+            self.baselineRenderer.render(self.currentRegion(), self.years());
         }
     };
 

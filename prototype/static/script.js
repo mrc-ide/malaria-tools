@@ -12,9 +12,9 @@ $(function () {
 
     $('.nav-item').on('mouseover', function(){
         $(this).addClass('focus');
-    })
+    });
 
     $('.nav-item').on('mouseout', function(){
         $(this).removeClass('focus');
-    })
+    });
 });

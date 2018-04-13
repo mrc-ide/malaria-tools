@@ -2,7 +2,7 @@
 	<div data-bind="if: showScenarioSection">
 		<div data-bind="with: currentScenario">
 		    <h5>
-		    	Baseline data for 
+				<span data-bind="text: $root.regionMode() == 'edit' ? 'Editing' : 'Viewing' "></span> baseline data for
 		        <span data-bind="text: country().name"></span>
 		    	(<span data-bind="text: region().name"></span>)
 		    </h5>
