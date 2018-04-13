@@ -149,7 +149,6 @@ function AppModel() {
     }, self);
 
     self.showResults = function () {
-        console.log(self.results.needsRerun());
         return self.currentScenario("results");
     };
 
