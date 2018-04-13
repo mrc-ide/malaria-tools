@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="styles.css"/>
+    <link type="text/css" rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
+    <link type="text/css" rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+<div class="border-right mode-bar sidebar bg-light">
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            <a class="nav-link" href="#"
+               data-bind="css: { active: mode() == 'scenario'}, click: function() { mode('scenario')}">
+                Scenarios</a>
+        </li>
+        <li class="list-inline-item" style="margin-left: -13px;">
+            <a class="nav-link" href="#"
+               data-bind="css: { active: mode() == 'country'}, 
+                          click: function() { 
+                              mode('country');
+                              $root.renderBaseline(); 
+                          }">
+                Countries
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="scenario-bar sidebar" data-bind="css: { in: mode() == 'scenario'}" id="scenario-bar">
+    <div class="add-open border-bottom">
+        <span data-bind="with: newScenario">
+            <a href="#"
+               class="d-inline"
+               data-bind="click: clear"
+               data-toggle="modal"
+               data-target="#new-scenario">
+                +
+            </a>
+        </span>
+        <a href="#" class="d-inline">
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="#007bff">
+    <g transform="scale(0.025 0.025)">
+        <path d="M832 960l192-512h-832l-192 512zM128 384l-128 576v-832h288l128 128h416v128z"></path>
+    </g>
+</svg>
+        </a>
+    </div>
+    <ul class="nav flex-column" id="scenarios" data-bind="foreach: scenarios">
+        <li class="nav-item">
+            <!--<input type="checkbox" data-bind="checked: selected" class="float-left"/>-->
+            <a class="nav-link" href="#"
+               data-bind="css: { active: $root.currentScenario() == $data },
+               click: function() {
+               $root.currentScenario($data);
+               $root.changeCountry($data.country());
+               }">
+                <span data-bind="text: name" class="d-block"></span>
+                <small>
+                    <div data-bind="with: country">
+                        <span data-bind="text: name"></span>
+                    </div>
+                    <div data-bind="with: region">
+                        <span data-bind="text: name"></span>
+                    </div>
+                </small>
+            </a>
+            <span style="clear: both"></span>
+        </li>
+    </ul>
+    <ul class="nav flex-column border-top" data-bind="if: hasResults">
+        <li class="nav-item">
+            <a class="nav-link"
+               href="#"
+               data-bind="css: { active: $root.currentScenario() == 'results' },
+                          click: showResults">
+                Results
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="country-bar sidebar" data-bind="css: { in: mode() == 'country'}" id="country-bar">
+    <ul class="nav flex-column" id="countries" data-bind="foreach: countries">
+        <li class="nav-item"><a class="nav-link" href="#"
+                                data-bind="css: { active: $root.currentCountry() == $data },
+                                 text: name, click: function() {
+                                 $parent.changeCountry($data);
+
+                                 }"></a></li>
+    </ul>
+</div>
+<div class="section-bar sidebar bg-light" data-bind="css: { in: showScenarioSection }"
+     id="sections">
+    <ul class="nav flex-column border-top">
+        <li class="nav-item">
+            <a id="interventions-tab" class="nav-link" href="#"
+               data-bind="css: {active: scenarioMode() == 'intervention'},
+               click: function() { scenarioMode('intervention')}">
+                Interventions
+            </a>
+        </li>
+        <li class="nav-item">
+            <a id="baseline-tab" class="nav-link" href="#"
+               data-bind="css: {active: scenarioMode() == 'baseline'},
+                          click: function() { scenarioMode('baseline'); renderBaseline(); }">
+                Baseline
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="region-bar sidebar bg-light" id="regions" data-bind="css: { in: mode() == 'country' && currentCountry()}">
+    <div data-bind="with: currentCountry">
+        <ul class="nav flex-column border-top" data-bind="foreach: regions">
+            <li class="nav-item"><a class="nav-link"
+                                    href="#"
+                                    data-bind="text: $data.name,
+                                     css: { active: $root.currentRegion() == $data },
+                                     click: function () {$root.changeRegion($data);}"
+                ></a></li>
+        </ul>
+    </div>
+</div>
+<div class="results-bar sidebar bg-light" id="results" data-bind="css: { in: showResultsSidebar }">
+    <div data-bind="with: results">
+        <ul class="nav flex-column" data-bind="foreach: graphs">
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="#"
+                   data-bind="text: name,
+                              css: { active: $parent.currentGraph() == $data },
+                              click: $parent.selectGraph">
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="contents container-fluid">
+    <div class="tab-content">
+        <div class="tab-pane" id="no-scenario"
+             data-bind="css: { active: showResultsSection }">
+            <div data-bind="ifnot: hasResults">
+    <div class="row p-5">
+        <div class="col-12">
+            <h4>You haven't created any scenarios yet.</h4>
+            <h4 data-bind="with: newScenario">
+                <a href="#"
+                   class="d-inline"
+                   data-bind="click: clear"
+                   data-toggle="modal"
+                   data-target="#new-scenario">
+                    Create scenario
+                </a>
+            </h4>
+        </div>
+    </div>
+
+</div>
+
+<div data-bind="visible: hasResults">
+    <div class="row" data-bind="visible: !loading(), with: results">
+        <div class="col-12 p-5">
+            <div style="width: 100%;">
+                <canvas id="results-graph"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="text-center pt-5" data-bind="if: loading">
+        <h5 class="text-muted mb-2 mt-5">Calculating results...</h5>
+        <img src="spinner.gif"/>
+    </div>
+</div>
+        </div>
+        <div class="tab-pane" id="interventions"
+             data-bind="css: {active: scenarioMode() == 'intervention' && showScenarioSection() }">
+            <div class="row">
+    <div class="col-12">
+        <h5 class="p-5">
+            Choose which interventions you want to include in this scenario
+        </h5>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <form class="pl-5" style="margin-right: -1em;">
+            <div class="form-group p-2"
+                 data-toggle="custom-tab"
+                 data-target="#settings-nets">
+                <input type="checkbox" id="nets"/>
+                <label class="checkbox-label">Insecticide Treated Nets</label>
+            </div>
+            <div class="form-group p-2"
+                 data-toggle="custom-tab"
+                 data-target="#settings-spray">
+                <input type="checkbox" id="spray"/>
+                <label class="checkbox-label">Indoor Residual Spraying</label>
+            </div>
+            <div class="form-group p-2"
+                 data-toggle="custom-tab"
+                 data-target="#settings-ipt">
+                <input type="checkbox" id="ipt"/>
+                <label class="checkbox-label">Intermittent Preventive Treatment in infants (IPTi)</label>
+            </div>
+            <div class="form-group p-2"
+                 data-toggle="custom-tab"
+                 data-target="#settings-smc">
+                <input type="checkbox" id="smc"/>
+                <label class="checkbox-label">Seasonal Malaria Chemoprevention (SMC)</label>
+            </div>
+            <div class="form-group p-2"
+                 data-toggle="custom-tab"
+                 data-target="#settings-mass">
+                <input type="checkbox" id="mass"/>
+                <label class="checkbox-label">Mass Treatment</label>
+            </div>
+            <div class="form-group p-2"
+                 data-toggle="custom-tab"
+                 data-target="#settings-epi">
+                <input type="checkbox" id="epi"/>
+                <label class="checkbox-label">EPI Vaccination</label>
+            </div>
+            <div class="form-group p-2"
+                 data-toggle="custom-tab"
+                 data-target="#settings-mass-vac">
+                <input type="checkbox" id="mass-vac"/>
+                <label class="checkbox-label">Mass Vaccination</label>
+            </div>
+            <div class="form-group p-2">
+                <input type="checkbox" id="first"/>
+                <label class="checkbox-label">First line Treatment</label>
+            </div>
+        </form>
+    </div>
+    <div class="col-6 pr-5 custom-tabs">
+        <!-- Insecticide treated nets -->
+        <div class="tab-pane p-5 settings" id="settings-nets">
+            <form>
+                <div class="form-group row">
+                    <label class="col-5 col-form-label" for="nets-coverage">Target coverage</label>
+                    <div class="col-7">
+                        <input type="number" value="26" id="nets-coverage"
+                               data-role="slider-value"
+                               data-target="#nets-slider" />
+                    </div>
+                </div>
+            </form>
+            <div class="slider"
+                 data-initial="26"
+                 data-control="#nets-coverage"
+                 id="nets-slider"></div>
+        </div>
+
+        <!-- Indoor residual spraying -->
+        <div class="tab-pane p-5 settings" id="settings-spray">
+            <form>
+                <div class="form-group row">
+                    <label class="col-5 col-form-label">Target coverage</label>
+                    <div class="col-7">
+                        <input type="number" value="50"
+                               id="spray-coverage"
+                               data-role="slider-value"
+                               data-target="#spray-slider"/>
+                    </div>
+                </div>
+
+            </form>
+            <div class="slider"
+                 data-control="#spray-coverage"
+                 data-initial="50"
+                 id="spray-slider"></div>
+            <form class="mt-5">
+                <div class="form-group row">
+                    <label class="col-5 col-form-label">Interval</label>
+                    <div class="col-7">
+                        <input type="number" value="1"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-5 col-form-label">Start year</label>
+                    <div class="col-7">
+                        <input type="number" value="0">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- IPT -->
+        <div class="tab-pane p-5 settings" id="settings-ipt">
+            <form>
+                <div class="form-group row">
+                    <label class="col-5 col-form-label">Target coverage</label>
+                    <div class="col-7">
+                        <input type="number" value="90"
+                               id="ipt-coverage"
+                               data-role="slider-value"
+                               data-target="#ipt-slider"/>
+                    </div>
+                </div>
+            </form>            
+            <div class="slider"
+                data-control="#ipt-coverage"
+                data-initial="50"
+                id="ipt-slider">
+            </div>
+            <form class="mt-5">
+                <div class="form-group row">
+                    <label for="ipt-start-year" class="col-5 col-form-label">Start year</label>
+                    <div class="col-7">
+                        <input type="number" value="0" id="ipt-start-year" />
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <!-- SMC -->
+        <div class="tab-pane p-5 settings" id="settings-smc">
+            <form>
+                <div class="form-group row">
+                    <label class="col-5 col-form-label">Target coverage</label>
+                    <div class="col-7">
+                        <input type="number" value="90"
+                               id="smc-coverage"
+                               data-role="slider-value"
+                               data-target="#smc-slider"/>
+                    </div>
+                </div>
+            </form>            
+            <div class="slider"
+                data-control="#smc-coverage"
+                data-initial="50"
+                id="smc-slider">
+            </div>
+            <form class="mt-5">
+                <div class="form-group row">
+                    <label for="smc-start-year" class="col-5 col-form-label">Start year</label>
+                    <div class="col-7">
+                        <input type="number" value="0" id="smc-start-year" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Mass treatment -->
+        <div class="tab-pane p-5 settings" id="settings-mass">
+            <form>
+                <div class="form-group row">
+                    <label class="col-5 col-form-label">Target coverage</label>
+                    <div class="col-7">
+                        <input type="number" value="80"
+                               id="mass-coverage"
+                               data-role="slider-value"
+                               data-target="#mass-slider"/>
+                    </div>
+                </div>
+            </form>            
+            <div class="slider"
+                data-control="#mass-coverage"
+                data-initial="50"
+                id="mass-slider">
+            </div>
+            <form class="mt-5">
+                <div class="form-group row">
+                    <label for="mass-interval" class="col-5 col-form-label">Interval (years)</label>
+                    <div class="col-7">
+                        <input type="number" value="1" id="mass-interval" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="mass-start" class="col-5 col-form-label">Start year</label>
+                    <div class="col-7">
+                        <input type="number" value="0" id="mass-start" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="mass-screen" class="col-9 col-form-label">Screen with a Rapid Diagonistic Test (MSAT)</label>
+                    <div class="col-3">
+                        <input type="checkbox" checked="checked" id="mass-screen" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12"><h5>Drugs</h5></div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="mass-arte" class="col-9 col-form-label">Artemether/lumefrantine</label>
+                    <div class="col-3">
+                        <input type="checkbox" checked="checked" id="mass-arte" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="mass-dha" class="col-9 col-form-label">DHA-piperaquine</label>
+                    <div class="col-3">
+                        <input type="checkbox" id="mass-dha" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- EPI Vaccination -->
+        <div class="tab-pane p-5 settings" id="settings-epi">
+            <form>
+                <div class="form-group row">
+                    <label for="epi-start" class="col-5 col-form-label">Start year</label>
+                    <div class="col-7">
+                        <input type="number" value="0" id="epi-start" />
+                    </div>
+                </div>
+                <div class="form-group row mt-5">
+                    <label class="col-5 col-form-label">Target coverage</label>
+                    <div class="col-7">
+                        <input type="number" value="90"
+                               id="epi-coverage"
+                               data-role="slider-value"
+                               data-target="#epi-coverage-slider"/>
+                    </div>
+                </div>
+            </form>            
+            <div class="slider"
+                data-control="#epi-coverage"
+                data-initial="50"
+                id="epi-coverage-slider">
+            </div>
+            <form>
+                <div class="form-group row mt-5">
+                    <label class="col-5 col-form-label">Efficacy</label>
+                    <div class="col-7">
+                        <input type="number" value="50"
+                               id="epi-efficacy"
+                               data-role="slider-value"
+                               data-target="#epi-efficacy-slider"/>
+                    </div>
+                </div>
+            </form>
+            <div class="slider"
+                data-control="#epi-efficacy"
+                data-initial="50"
+                id="epi-efficacy-slider">
+            </div>
+            <form>
+                <div class="form-group row mt-5">
+                    <label for="epi-duration" class="col-5 col-form-label">Duration of protection</label>
+                    <div class="col-7">
+                        <div class="row" id="epi-duration">
+                            <div class="col-3">
+                                <input type="number" value="3" />
+                            </div>
+                            <div class="col-3">
+                                <label for="">years</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="number" value="0" />
+                            </div>
+                            <div class="col-3">
+                                months
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Mass vaccination -->
+        <div class="tab-pane p-5 settings" id="settings-mass-vac">
+            <form>
+                <div class="form-group row">
+                    <label for="mass-vac-start" class="col-5 col-form-label">Start year</label>
+                    <div class="col-7">
+                        <input type="number" value="0" id="mass-vac-start" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mass-vac-interval" class="col-5 col-form-label">Interval (years)</label>
+                    <div class="col-7">
+                        <input type="number" value="3" id="mass-vac-interval" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mass-vac-lower-age" class="col-5 col-form-label">Lower age</label>
+                    <div class="col-7">
+                        <input type="number" value="200" id="mass-vac-lower-age" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mass-vac-upper-age" class="col-5 col-form-label">Upper age</label>
+                    <div class="col-7">
+                        <input type="number" value="0" id="mass-vac-upper-age" />
+                    </div>
+                </div>
+                <div class="form-group row mt-5">
+                    <label class="col-5 col-form-label">Target coverage</label>
+                    <div class="col-7">
+                        <input type="number" value="90"
+                               id="mass-vac-coverage"
+                               data-role="slider-value"
+                               data-target="#mass-vac-coverage-slider"/>
+                    </div>
+                </div>
+            </form>            
+            <div class="slider"
+                data-control="#mass-vac-coverage"
+                data-initial="50"
+                id="mass-vac-coverage-slider">
+            </div>
+            <form>
+                <div class="form-group row mt-5">
+                    <label class="col-5 col-form-label">Efficacy</label>
+                    <div class="col-7">
+                        <input type="number" value="50"
+                               id="mass-vac-efficacy"
+                               data-role="slider-value"
+                               data-target="#mass-vac-efficacy-slider"/>
+                    </div>
+                </div>
+            </form>
+            <div class="slider"
+                data-control="#mass-vac-efficacy"
+                data-initial="50"
+                id="mass-vac-efficacy-slider">
+            </div>
+            <form>
+                <div class="form-group row mt-5">
+                    <label for="mass-vac-duration" class="col-5 col-form-label">Duration of protection</label>
+                    <div class="col-7">
+                        <div class="row" id="mass-vac-duration">
+                            <div class="col-3">
+                                <input type="number" value="3" />
+                            </div>
+                            <div class="col-3">
+                                <label for="">years</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="number" value="0" />
+                            </div>
+                            <div class="col-3">
+                                months
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row fixed-bottom">
+    <div class="col-12">
+        <div class="float-right p-5">
+            <button class="rounded-0 btn btn-lg btn-primary"
+                    data-bind="click: showResults">Save</button>
+            <button class="rounded-0 btn btn-lg btn-light" data-bind="click: showResults">Discard</button>
+        </div>
+    </div>
+</div>
+        </div>
+
+        <div class="tab-pane" id="baseline"
+             data-bind="css: {active: scenarioMode() == 'baseline' && showScenarioSection()
+             || mode() == 'country' && currentRegion() }">
+            <div class="full-screen">
+                <div class="p-5">
+                    <div data-bind="if: mode() == 'country'">
+    <h5>
+        <span data-bind="text: regionMode() == 'edit' ? 'Editing' : 'Viewing' "></span> baseline data for
+        <span data-bind="text: currentCountry().name"></span>
+        (<span data-bind="text: currentRegion().name"></span>)
+    </h5>
+</div>
+                    <div data-bind="if: mode() == 'scenario'">
+	<div data-bind="if: showScenarioSection">
+		<div data-bind="with: currentScenario">
+		    <h5>
+				<span data-bind="text: $root.regionMode() == 'edit' ? 'Editing' : 'Viewing' "></span> baseline data for
+		        <span data-bind="text: country().name"></span>
+		    	(<span data-bind="text: region().name"></span>)
+		    </h5>
+	    </div>
+    </div>
+</div>
+                    <div data-bind="visible: regionMode() == 'view'">
+                        <p>
+  <span data-bind="if: canEditCountry">
+      <a href="#" class="mb-5" data-bind="click: function() {regionMode('edit'); initSliders()}">Edit</a>
+  </span>
+  <span data-bind="ifnot: canEditCountry">
+      <a href="#" 
+         data-toggle="modal"
+         data-target="#new-country" 
+         data-bind="text: mode() == 'scenario' ? 'Edit this baseline' : 'Create an editable copy of this baseline',
+                    click: setupNewCountryForm">
+      </a>
+  </span>
+  <span data-bind="if: mode() == 'scenario'">
+      <span style="margin: 0 10px;">|</span>
+      <a href="#"
+         data-toggle="modal"
+         data-target="#choose-different-baseline"
+         data-bind="click: newScenario().clear()">
+          Change to a different baseline   
+      </a>
+  </span>
+</p>
+<div class="text-secondary" data-bind="with: currentRegion">
+    <div class="d-inline mr-3 text-secondary">
+        <strong>Year</strong>: <span data-bind="text: year"></span>
+    </div>
+    <div class="d-inline mr-3">
+        <strong>Age range</strong>: <span data-bind="text: ageStart"></span> - <span data-bind="text: ageEnd"></span>
+    </div>
+    <div class="d-inline mr-3">
+        <strong>Model estimated baseline under 5 prevalence</strong>:42.6
+    </div>
+</div>
+
+<div class="mt-5" style="width: 700px;">
+    <canvas class="seasonal"></canvas>
+</div>
+<div style="width: 400px;" class="mt-5">
+    <canvas class="vectors"></canvas>
+</div>
+<div style="width: 700px;" class="mt-5">
+    <canvas class="itn"></canvas>
+</div>
+                    </div>
+                    <div data-bind="visible: regionMode() == 'edit'">
+                        <div class="row">
+    <div class="col-12 col-md-8">
+        <p>
+            <a href="#" class="mb-5" data-bind="click: function() {regionMode('view'); renderBaseline(); }">View</a>
+        </p>
+
+        <form class="mt-4" data-bind="with: currentRegion">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Year</label>
+                    <input class="form-control rounded-0" type="number"
+                           data-bind="value: year"/>
+                </div>
+                <div class="col-4">
+                    <label>Age start</label>
+                    <input class="form-control rounded-0" type="number"
+                           data-bind="value:ageStart"/>
+                </div>
+                <div class="col-4">
+                    <label>Age end</label>
+                    <input class="form-control rounded-0" type="number"
+                           data-bind="value: ageEnd"/>
+                </div>
+            </div>
+            <hr class="mt-5 mb-4"/>
+            <h5>Vectors</h5>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Funestus</label>
+                    <input class="form-control rounded-0"
+                           type="number"
+                           data-bind="css: {'is-invalid': !validVectors()}, value: vectors().f"/>
+                </div>
+                <div class="col-4">
+                    <label>Arabiensis</label>
+                    <input class="form-control rounded-0"
+                           type="number"
+                           data-bind="css: {'is-invalid': !validVectors()}, value: vectors().a"/>
+                </div>
+                <div class="col-4">
+                    <label>Gambiae</label>
+                    <input class="form-control rounded-0"
+                           type="number"
+                           data-bind="css: {'is-invalid': !validVectors()}, value: vectors().g"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <div class="invalid-feedback d-block" data-bind="if: !validVectors()">
+                        Vector percentages must sum to 100
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr class="mt-5 mb-4"/>
+        <h5>Past ITN Use</h5>
+        <div data-bind="foreach: years" class="mb-5">
+            <form class="mt-3">
+                <div class="form-group row">
+                    <label class="col-5 col-form-label" data-bind="text: $data">2013</label>
+                    <div class="col-7">
+                        <input type="number"
+                               data-bind="attr: {id: $data + '-coverage', 'data-target': '#' + $data + '-slider'}"
+                               value="50"
+                               data-role="slider-value"/>
+                    </div>
+                </div>
+
+            </form>
+            <div class="slider"
+                 data-bind="attr: {id: $data + '-slider', 'data-control': '#' + $data + '-coverage'}"
+                 data-initial="50"></div>
+
+        </div>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="new-scenario" class="modal fade" role="dialog" data-bind="with: newScenario">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h3 class="modal-title">New scenario</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4>Choose a country or region</h4>
+                    <style>
+    .country-chooser {
+        height: 450px;
+        overflow-y: scroll;
+    }
+
+    .country-chooser .list-group .list-group .list-group-item {
+        padding-left: 50px;
+    }
+</style> 
+
+<div class="country-chooser mb-3">
+    <ul data-bind="foreach: $root.countries" class="list-group">
+        <li>
+            <span class="list-group-item"
+                  data-bind="text: name,
+                             css: { active: $parents[0].isActive($data) },
+                             click: $parent.selectCountry">
+            </span>
+            <div class="collapse">
+                <ul class="list-group mt-1 mb-1 mr-3 ml-3" data-bind="foreach: regions">
+                    <li class="list-group-item list-group-item-secondary"
+                        data-bind="text: $data.name,
+                                   click: $parents[1].selectRegion,
+                                   css: { active: $parents[1].isActive($data) }">
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+                    <div>
+                        <h4>Enter a name for the scenario</h4>
+                        <input type="text"
+                               class="form-control rounded-0"
+                               data-bind="textInput: name"
+                               style="width: 100%;" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <button type="submit"
+                                class="btn btn-primary rounded-0"
+                                data-bind="enable: isValid, click: createScenario"
+                                data-dismiss="modal">
+                            Save
+                        </button>
+                        <button class="btn btn-secondary rounded-0" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="new-country" class="modal fade" role="dialog" data-bind="with: newCountryForm">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create a new baseline</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    The <span data-bind="text: originalName"></span>
+                    baseline is built-in and can't be changed. Instead, you can
+                    create a copy of this data and then edit that copy.
+                </div>
+                <div class="mt-3 mb-2">
+                    <div class="mb-1">Enter a name for the new baseline data set</div>
+                    <input type="text" class="form-control rounded-0"
+                           data-bind="textInput: name"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <button class="btn btn-primary rounded-0"
+                            data-toggle="modal"
+                            data-target="#new-country"
+                            data-bind="click: addCountry">Save
+                    </button>
+                    <button class="btn btn-light rounded-0" data-toggle="modal" data-target="#new-country">Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="choose-different-baseline" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Choose a different baseline</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div data-bind="with: newScenario">
+                    <div class="m-3">
+                        <style>
+    .country-chooser {
+        height: 450px;
+        overflow-y: scroll;
+    }
+
+    .country-chooser .list-group .list-group .list-group-item {
+        padding-left: 50px;
+    }
+</style> 
+
+<div class="country-chooser mb-3">
+    <ul data-bind="foreach: $root.countries" class="list-group">
+        <li>
+            <span class="list-group-item"
+                  data-bind="text: name,
+                             css: { active: $parents[0].isActive($data) },
+                             click: $parent.selectCountry">
+            </span>
+            <div class="collapse">
+                <ul class="list-group mt-1 mb-1 mr-3 ml-3" data-bind="foreach: regions">
+                    <li class="list-group-item list-group-item-secondary"
+                        data-bind="text: $data.name,
+                                   click: $parents[1].selectRegion,
+                                   css: { active: $parents[1].isActive($data) }">
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <button class="btn btn-primary rounded-0"
+                            data-toggle="modal"
+                            data-target="#choose-different-baseline"
+                            data-bind="click: changeBaseline">
+                        Save
+                    </button>
+                    <button class="btn btn-light rounded-0" 
+                            data-toggle="modal" 
+                            data-target="#choose-different-baseline">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="update-scenarios" class="modal fade" role="dialog" data-bind="with: updateScenariosForm">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h3 class="modal-title">Update scenarios</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        The following scenarios also currently use the 
+                        <strong data-bind="text: originalCountryName"></strong> baseline. 
+                        Select the scenarios that you want to update to use the new 
+                        <strong data-bind="text: newCountryName"></strong> baseline.
+                    </p>
+                    <p>
+                        Any scenarios you uncheck will continue to use the original 
+                        <strong data-bind="text: originalCountryName"></strong> baseline data.
+                    </p>
+                    <ul data-bind="foreach: scenarios" class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-1">
+                                    <input type="checkbox" data-bind="checked: selected" />
+                                </div>
+                                <div class="col-11" data-bind="click: toggle">
+                                    <label data-bind="text: name" />
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <button type="submit"
+                                class="btn btn-primary rounded-0"
+                                data-dismiss="modal"
+                                data-bind="click: updateScenarios">
+                            Update selected
+                        </button>
+                        <button class="btn btn-secondary rounded-0" data-dismiss="modal">
+                            Just update <span data-bind="text: intendedScenarioName" />
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+
+</script>
+<script type="text/javascript"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+        type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+<script type="https://github.com/gvas/knockout-jqueryui/releases/download/v0.5.2/knockout-jqueryui.js"></script>
+
+<script type="text/javascript" src="models/app.model.js"></script>
+<script type="text/javascript" src="models/scenario.model.js"></script>
+<script type="text/javascript" src="models/newscenario.model.js"></script>
+<script type="text/javascript" src="models/newcountryform.model.js"></script>
+<script type="text/javascript" src="models/updatescenariosform.model.js"></script>
+<script type="text/javascript" src="models/results.model.js"></script>
+<script type="text/javascript" src="models/country.model.js"></script>
+<script type="text/javascript" src="baselinerenderer.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/mrc-ide/malaria-tools#readme",
   "dependencies": {
-    "ejs": "^2.5.8",
-    "express": "^4.16.3"
+    "gulp": "^3.9.1",
+    "gulp-ejs": "^3.1.2"
   }
 }
