@@ -54,7 +54,6 @@ function Results(app) {
 
     var charts = [];
     var renderChart = function(target, scenarios, yLabel, xLabel) {
-        console.log("Rendering chart");
         var colors = [
             "#4D4D4D",
             "#5DA5DA",
